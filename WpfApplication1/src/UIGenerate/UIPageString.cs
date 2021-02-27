@@ -23,7 +23,7 @@ namespace ArdClock.UIGenerate
             : base(60)
         {
             PageString ps = (PageString)pEl;
-            SetID (ps.ID);
+            SetID (PageString.ID);
 
             // Интерфейс для настройки позиции
             Label lbl_pos = new Label();
@@ -160,7 +160,6 @@ namespace ArdClock.UIGenerate
                 clr, 
                 (byte)sz,
                 dt);
-            p_out.SetID(id);
             
             return p_out;
         }
