@@ -5,15 +5,13 @@ using System.Text;
 using System.Windows;
 using System.Xml;
 
-using ArdClock.src;
-using ArdClock.src.ArdPage;
-using ArdClock.src.ArdPage.HelpingClass;
-using ArdClock.src.UIGenerate;
-using ArdClock.src.ArdPage.PageElements;
+using ArdClock.ArdPage;
+using ArdClock.ArdPage.HelpingClass;
 
 using BaseLib;
+using BaseLib.Xml;
 
-namespace ArdClock.src.XMLLoader
+namespace ArdClock.XMLLoader
 {
     static class Loader
     {

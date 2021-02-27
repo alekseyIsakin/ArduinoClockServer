@@ -13,9 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Ports;
 
-using ArdClock.src.HelpingClass;
-using ArdClock.src.ArdPage.PageElements;
-using ArdClock.src.ArdPage;
+using ArdClock.ArdPage;
 
 namespace ArdClock
 {
@@ -27,8 +25,8 @@ namespace ArdClock
         //private System.Timers.Timer timer2;
         private System.Windows.Threading.DispatcherTimer timer;
 
-        private src.SerialControl.DataSender DSender;
-        private src.ArdPage.APage SenderPage;
+        private SerialControl.DataSender DSender;
+        private ArdPage.APage SenderPage;
 
         public window.PageEditorWindow PEWindow;
 
@@ -99,7 +97,7 @@ namespace ArdClock
             timer = new System.Windows.Threading.DispatcherTimer();
             timer.Tick += TimerElapsed;
 
-            DSender = new src.SerialControl.DataSender();
+            DSender = new SerialControl.DataSender();
             DSender.TimerIsOver += EnableSend;
             DSender.SuccSend += LockSend;
             string[] lstSpd = { "300", "1200", "2400", "4800", "9600", "19200", "38400" };

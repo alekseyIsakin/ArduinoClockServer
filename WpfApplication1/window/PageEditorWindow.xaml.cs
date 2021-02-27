@@ -12,14 +12,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 
-using ArdClock.src;
-using ArdClock.src.ArdPage;
-using ArdClock.src.ArdPage.HelpingClass;
-using ArdClock.src.UIGenerate;
-using ArdClock.src.ArdPage.PageElements;
-using ArdClock.src.XMLLoader;
+using ArdClock;
+using ArdClock.ArdPage;
+using ArdClock.ArdPage.HelpingClass;
+using ArdClock.UIGenerate;
+using ArdClock.ArdPage.PageElements;
+using ArdClock.XMLLoader;
 
 using BaseLib;
+using BaseLib.HelpingClass;
 
 namespace ArdClock.window
 {

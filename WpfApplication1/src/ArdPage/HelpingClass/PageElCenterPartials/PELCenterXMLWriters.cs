@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-using ArdClock.src.ArdPage;
-using ArdClock.src.UIGenerate;
-using ArdClock.src.ArdPage.PageElements;
-using ArdClock.src.XMLLoader;
+using ArdClock.ArdPage;
+using ArdClock.UIGenerate;
+using ArdClock.ArdPage.PageElements;
+using ArdClock.XMLLoader;
 
 using BaseLib;
+using BaseLib.Xml;
 
-namespace ArdClock.src.ArdPage.HelpingClass
+namespace ArdClock.ArdPage.HelpingClass
 {
     public static partial class PageElCenter
     {
@@ -33,7 +34,7 @@ namespace ArdClock.src.ArdPage.HelpingClass
                 (XMLDefines.XMLTag.PageEl).ToString());
 
             var attrTypeEl = xdd.CreateAttribute(
-                XMLDefines.XMLStringAttr.TypeEl.ToString());
+                XMLDefines.XMLBaseElAttr.TypeEl.ToString());
 
             attrTypeEl.Value = ((int)ps.GetTypeEl()).ToString();
 
@@ -41,12 +42,12 @@ namespace ArdClock.src.ArdPage.HelpingClass
 
             // Позиция
             var ndPos = xdd.CreateElement(
-                XMLDefines.XMLStringTag.Position.ToString());
+                XMLDefines.XMLBaseElTag.Position.ToString());
 
             var attrPosX = xdd.CreateAttribute(
-                XMLDefines.XMLStringAttr.PosX.ToString());
+                XMLDefines.XMLBaseElAttr.PosX.ToString());
             var attrPosY = xdd.CreateAttribute(
-                XMLDefines.XMLStringAttr.PosY.ToString());
+                XMLDefines.XMLBaseElAttr.PosY.ToString());
 
             attrPosX.Value = ps.X.ToString();
             attrPosY.Value = ps.Y.ToString();
@@ -56,10 +57,10 @@ namespace ArdClock.src.ArdPage.HelpingClass
 
             // Цвет
             var ndClr = xdd.CreateElement(
-                XMLDefines.XMLStringTag.Color.ToString());
+                XMLDefines.XMLBaseElTag.Color.ToString());
 
             var attrClr = xdd.CreateAttribute(
-                XMLDefines.XMLStringAttr.ColorValue.ToString());
+                XMLDefines.XMLBaseElAttr.ColorValue.ToString());
 
             attrClr.Value = ps.TextColor.ToHex();
 
@@ -67,10 +68,10 @@ namespace ArdClock.src.ArdPage.HelpingClass
 
             // Размер
             var ndSz = xdd.CreateElement(
-                XMLDefines.XMLStringTag.Size.ToString());
+                XMLDefines.XMLBaseElTag.Size.ToString());
 
             var attrSz = xdd.CreateAttribute(
-                XMLDefines.XMLStringAttr.SizeValue.ToString());
+                XMLDefines.XMLBaseElAttr.SizeValue.ToString());
 
             attrSz.Value = ps.Size.ToString();
 
@@ -78,10 +79,10 @@ namespace ArdClock.src.ArdPage.HelpingClass
 
             // Текст
             var ndDt = xdd.CreateElement(
-                XMLDefines.XMLStringTag.Data.ToString());
+                XMLDefines.XMLBaseElTag.Data.ToString());
 
             var attrDt = xdd.CreateAttribute(
-                XMLDefines.XMLStringAttr.Data.ToString());
+                XMLDefines.XMLBaseElAttr.Data.ToString());
 
             attrDt.Value = ps.Data;
 
@@ -104,7 +105,7 @@ namespace ArdClock.src.ArdPage.HelpingClass
                 (XMLDefines.XMLTag.PageEl).ToString());
 
             var attrTypeEl = xdd.CreateAttribute(
-                XMLDefines.XMLTimeAttr.TypeEl.ToString());
+                XMLDefines.XMLBaseElAttr.TypeEl.ToString());
 
             attrTypeEl.Value = ((int)pt.GetTypeEl()).ToString();
 
@@ -112,12 +113,12 @@ namespace ArdClock.src.ArdPage.HelpingClass
 
             // Позиция
             var ndPos = xdd.CreateElement(
-                XMLDefines.XMLTimeTag.Position.ToString());
+                XMLDefines.XMLBaseElTag.Position.ToString());
 
             var attrPosX = xdd.CreateAttribute(
-                XMLDefines.XMLTimeAttr.PosX.ToString());
+                XMLDefines.XMLBaseElAttr.PosX.ToString());
             var attrPosY = xdd.CreateAttribute(
-                XMLDefines.XMLTimeAttr.PosY.ToString());
+                XMLDefines.XMLBaseElAttr.PosY.ToString());
 
             attrPosX.Value = pt.X.ToString();
             attrPosY.Value = pt.Y.ToString();
@@ -127,10 +128,10 @@ namespace ArdClock.src.ArdPage.HelpingClass
 
             // Цвет
             var ndClr = xdd.CreateElement(
-                XMLDefines.XMLTimeTag.Color.ToString());
+                XMLDefines.XMLBaseElTag.Color.ToString());
 
             var attrClr = xdd.CreateAttribute(
-                XMLDefines.XMLTimeAttr.ColorValue.ToString());
+                XMLDefines.XMLBaseElAttr.ColorValue.ToString());
 
             attrClr.Value = pt.TextColor.ToHex();
 
@@ -138,10 +139,10 @@ namespace ArdClock.src.ArdPage.HelpingClass
 
             // Размер
             var ndSz = xdd.CreateElement(
-                XMLDefines.XMLTimeTag.Size.ToString());
+                XMLDefines.XMLBaseElTag.Size.ToString());
 
             var attrSz = xdd.CreateAttribute(
-                XMLDefines.XMLTimeAttr.SizeValue.ToString());
+                XMLDefines.XMLBaseElAttr.SizeValue.ToString());
 
             attrSz.Value = pt.Size.ToString();
 
@@ -149,10 +150,10 @@ namespace ArdClock.src.ArdPage.HelpingClass
 
             // Данные
             var ndDt = xdd.CreateElement(
-                XMLDefines.XMLTimeTag.Data.ToString());
+                XMLDefines.XMLBaseElTag.Data.ToString());
 
             var attrSec = xdd.CreateAttribute(
-                XMLDefines.XMLTimeAttr.DataTmFlag.ToString());
+                XMLDefines.XMLBaseElAttr.Data.ToString());
 
             attrSec.Value = pt.Second ? "1" : "0";
             attrSec.Value += pt.Minute ? "1" : "0";
