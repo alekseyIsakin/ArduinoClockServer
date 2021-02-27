@@ -5,7 +5,7 @@ using System.Text;
 
 using BaseLib;
 
-namespace ArdClock.src.ArdPage.PageElements
+namespace ArdClock.ArdPage.PageElements
 {
     class PageClear : AbstrPageEl
     {

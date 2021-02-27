@@ -41,6 +41,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -105,23 +106,16 @@
     <Compile Include="src\ArdPage\HelpingClass\PageElCenterPartials\PELCenterXMLLoaders.cs" />
     <Compile Include="src\ArdPage\HelpingClass\PageElCenterPartials\PELCenterXMLWriters.cs" />
     <Compile Include="src\ArdPage\PageElements\PageClear.cs" />
-    <Compile Include="src\ArdPage\PageElements\PageEl.cs" />
     <Compile Include="src\ArdPage\PageElements\PageString.cs" />
     <Compile Include="src\ArdPage\PageElements\PageTime.cs" />
     <Compile Include="src\ArdPage\APage.cs" />
-    <Compile Include="src\UIGenerate\UIAcolorBox.cs" />
-    <Compile Include="src\ArdPage\HelpingClass\AColor.cs" />
-    <Compile Include="src\ArdPage\HelpingClass\AColors.cs" />
     <Compile Include="src\ArdPage\HelpingClass\HelpingArduino.cs" />
     <Compile Include="src\NIcon.cs" />
     <Compile Include="src\SerialControl\DataSender.cs" />
-    <Compile Include="src\UIGenerate\UIBaseEl.cs" />
-    <Compile Include="src\UIGenerate\UIGenerateHelping.cs" />
     <Compile Include="src\UIGenerate\UIPageString.cs" />
     <Compile Include="src\UIGenerate\UIPageTime.cs" />
     <Compile Include="src\XMLLoader\Loader.cs" />
     <Compile Include="src\XMLLoader\Writer.cs" />
-    <Compile Include="src\XMLLoader\XMLDefines.cs" />
     <Compile Include="window\PageEditorWindow.xaml.cs">
       <DependentUpon>PageEditorWindow.xaml</DependentUpon>
     </Compile>

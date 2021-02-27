@@ -5,13 +5,16 @@ using System.Text;
 using System.Windows;
 using System.Xml;
 
-using ArdClock.src;
-using ArdClock.src.UIGenerate;
-using ArdClock.src.ArdPage;
-using ArdClock.src.ArdPage.HelpingClass;
-using ArdClock.src.ArdPage.PageElements;
+using ArdClock;
+using ArdClock.UIGenerate;
+using ArdClock.ArdPage;
+using ArdClock.ArdPage.HelpingClass;
+using ArdClock.ArdPage.PageElements;
 
-namespace ArdClock.src.XMLLoader
+using BaseLib.Xml;
+
+
+namespace ArdClock.XMLLoader
 {
     static class Writer
     {

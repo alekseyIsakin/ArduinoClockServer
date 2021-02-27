@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.IO.Ports;
 
-using ArdClock.src.HelpingClass;
-using ArdClock.src.ArdPage;
-using ArdClock.src.ArdPage.PageElements;
+using ArdClock.ArdPage.PageElements;
 
-namespace ArdClock.src.SerialControl
+namespace ArdClock.SerialControl
 {
     class DataSender
     {
@@ -58,7 +56,7 @@ namespace ArdClock.src.SerialControl
         public void Connect() { SPort.Open(); }
         public void Disconnect() { SPort.Close(); }
 
-        public void Send(src.ArdPage.APage page)
+        public void Send(ArdPage.APage page)
         {
             List<byte> arrOut = new List<byte>();
             arrOut = page.GenSendData();
