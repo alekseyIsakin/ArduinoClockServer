@@ -20,7 +20,7 @@ namespace ArdClock.UIGenerate
             : base(47)
         {
             PageTime pt = (PageTime)pEl;
-            SetID(pt.ID);
+            SetID(PageTime.ID);
 
             // Интерфейс для настройки позиции
             Label lbl_pos = new Label();
@@ -187,7 +187,6 @@ namespace ArdClock.UIGenerate
             ((PageTime)p_out).Second = sec;
             ((PageTime)p_out).Minute = min;
             ((PageTime)p_out).Hour = hour;
-            p_out.SetID(id);
 
             return p_out;
         }

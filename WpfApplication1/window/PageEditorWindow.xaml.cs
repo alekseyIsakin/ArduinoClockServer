@@ -112,7 +112,6 @@ namespace ArdClock.window
             for (int i = 0; i < editPage.Elements.Count; i++ )
             {
                 var el = editPage.Elements[i];
-                el.SetID(i);
                 CreateNewUIel(el);
             }
 
