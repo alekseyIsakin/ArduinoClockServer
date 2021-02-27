@@ -13,15 +13,10 @@ namespace ArdClock.ArdPage.HelpingClass
 {
     public static partial class PageElCenter
     {
-        private static Func<AbstrPageEl>[] _funcsConstruct = new Func<AbstrPageEl>[128];
-
-        private static Func<System.Xml.XmlNode, AbstrPageEl>[] _funcsXmlLoaders
-            = new Func<System.Xml.XmlNode, AbstrPageEl>[128];
-        private static Func<AbstrPageEl, System.Xml.XmlDocument, System.Xml.XmlElement>[] _funcsXmlWriters
-            = new Func<AbstrPageEl, System.Xml.XmlDocument, System.Xml.XmlElement>[128];
-
-        public static Func<AbstrPageEl, AbstrUIBase>[] _funcsUIConstruct
-            = new Func<AbstrPageEl, AbstrUIBase>[128];
+        private static BaseConstruct[] _funcsConstruct = new BaseConstruct[128];
+        private static BaseXMLLoader[] _funcsXmlLoaders = new BaseXMLLoader[128];
+        private static BaseXMLWriter[] _funcsXmlWriters = new BaseXMLWriter[128];
+        public static BaseUIConstruct[] _funcsUIConstruct = new BaseUIConstruct[128];
 
         static private List<int> _index = new List<int>();
         static private Dictionary<int, string> _namesPageEl = new Dictionary<int,string>();
