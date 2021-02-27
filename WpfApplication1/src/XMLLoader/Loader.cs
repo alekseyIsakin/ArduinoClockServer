@@ -6,7 +6,6 @@ using System.Windows;
 using System.Xml;
 
 using ArdClock.ArdPage;
-using ArdClock.ArdPage.HelpingClass;
 
 using BaseLib;
 using BaseLib.Xml;
