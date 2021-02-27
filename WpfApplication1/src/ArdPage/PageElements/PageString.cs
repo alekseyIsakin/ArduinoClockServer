@@ -10,16 +10,9 @@ namespace ArdClock.ArdPage.PageElements
 {
     class PageString : PageEl
     {
+        public new const byte ID = 65;
         public override byte GetTypeEl()
-        { return 65; }
-
-        enum StrPageEl
-        {
-            Position = 1,
-            Color,
-            Size,
-            Data,
-        }
+        { return ID; }
 
         public AColor TextColor;
         public byte Size;
