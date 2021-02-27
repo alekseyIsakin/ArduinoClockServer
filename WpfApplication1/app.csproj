@@ -102,17 +102,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="src\ArdPage\HelpingClass\PageElCenter.cs" />
-    <Compile Include="src\ArdPage\HelpingClass\PageElCenterPartials\PELCenterXMLLoaders.cs" />
-    <Compile Include="src\ArdPage\HelpingClass\PageElCenterPartials\PELCenterXMLWriters.cs" />
-    <Compile Include="src\ArdPage\PageElements\PageString.cs" />
-    <Compile Include="src\ArdPage\PageElements\PageTime.cs" />
+    <Compile Include="src\ArdPage\PageElCenter.cs" />
     <Compile Include="src\ArdPage\APage.cs" />
-    <Compile Include="src\ArdPage\HelpingClass\HelpingArduino.cs" />
     <Compile Include="src\NIcon.cs" />
     <Compile Include="src\SerialControl\DataSender.cs" />
-    <Compile Include="src\UIGenerate\UIPageString.cs" />
-    <Compile Include="src\UIGenerate\UIPageTime.cs" />
     <Compile Include="src\XMLLoader\Loader.cs" />
     <Compile Include="src\XMLLoader\Writer.cs" />
     <Compile Include="window\PageEditorWindow.xaml.cs">
@@ -190,8 +183,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BaseElementsLib\BaseElementsLib\BaseElementsLib.csproj">
-      <Project>{630B22F5-3F3E-4FAA-BB07-B1ABC619369D}</Project>
+      <Project>{630b22f5-3f3e-4faa-bb07-b1abc619369d}</Project>
       <Name>BaseElementsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libray1\Libray1\Libray1.csproj">
+      <Project>{0ccab0a7-899c-414a-a3f2-e6a14d17a0a6}</Project>
+      <Name>Libray1</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

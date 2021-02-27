@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ArdClock.HelpingClass;
-using ArdClock.ArdPage.PageElements;
-using ArdClock.UIGenerate;
-
 using BaseLib;
 
 namespace ArdClock.ArdPage
