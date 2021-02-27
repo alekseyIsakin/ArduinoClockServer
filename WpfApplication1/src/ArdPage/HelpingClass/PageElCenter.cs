@@ -22,22 +22,20 @@ namespace ArdClock.ArdPage.HelpingClass
         static private Dictionary<int, string> _namesPageEl = new Dictionary<int,string>();
 
         const int TBaseEl = 0;
-        const int TString = 65;
-        const int TTime = 66;
         const int TClearCode = 127;
 
         static PageElCenter()
         {
-            _index.Add(TBaseEl);
-            _index.Add(TClearCode);
+            _index.Add(PageEl.ID);
+            _index.Add(PageClear.ID);
 
-            ExternalLib elString = new ExternalLib(TString, "String",
+            ExternalLib elString = new ExternalLib(PageString.ID, "String",
                 () => new PageString(),
                 (pEl) => new UIPageString(pEl),
                 (nd) => ReadLikePageString(nd),
                 (ps, xd) => XmlElFromPageString(ps, xd));
 
-            ExternalLib elTime = new ExternalLib(TTime, "Time",
+            ExternalLib elTime = new ExternalLib(PageTime.ID, "Time",
                 () => new PageTime(),
                 (pEl) => new UIPageTime(pEl),
                 (nd) => ReadLikePageTime(nd),

@@ -10,8 +10,9 @@ namespace ArdClock.ArdPage.PageElements
 {
     class PageTime : PageEl
     {
+        public new const byte ID = 66;
         public override byte GetTypeEl()
-        { return 66; }
+        { return ID; }
 
         const byte MaxSize = 15;
 
