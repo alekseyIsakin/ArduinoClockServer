@@ -5,11 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Xml;
 
-using ArdClock;
-using ArdClock.UIGenerate;
 using ArdClock.ArdPage;
-using ArdClock.ArdPage.HelpingClass;
-using ArdClock.ArdPage.PageElements;
 
 using BaseLib.Xml;
 

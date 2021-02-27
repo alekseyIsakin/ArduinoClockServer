@@ -12,11 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 
-using ArdClock;
 using ArdClock.ArdPage;
-using ArdClock.ArdPage.HelpingClass;
-using ArdClock.UIGenerate;
-using ArdClock.ArdPage.PageElements;
 using ArdClock.XMLLoader;
 
 using BaseLib;

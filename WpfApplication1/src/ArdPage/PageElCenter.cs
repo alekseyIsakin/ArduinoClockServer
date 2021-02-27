@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ArdClock.ArdPage;
-using ArdClock.UIGenerate;
-using ArdClock.ArdPage.PageElements;
-
 using BaseLib;
 
-namespace ArdClock.ArdPage.HelpingClass
+namespace ArdClock.ArdPage
 {
     public static partial class PageElCenter
     {
@@ -29,22 +25,9 @@ namespace ArdClock.ArdPage.HelpingClass
             _index.Add(PageEl.ID);
             _index.Add(PageClear.ID);
 
-            ExternalLib elString = new ExternalLib(PageString.ID, "String",
-                () => new PageString(),
-                (pEl) => new UIPageString(pEl),
-                (nd) => ReadLikePageString(nd),
-                (ps, xd) => XmlElFromPageString(ps, xd));
-
-            ExternalLib elTime = new ExternalLib(PageTime.ID, "Time",
-                () => new PageTime(),
-                (pEl) => new UIPageTime(pEl),
-                (nd) => ReadLikePageTime(nd),
-                (ps, xd) => XmlElFromPageTime(ps, xd));
-
-            AddNewElement(elString);
-            AddNewElement(elTime);
+            AddNewElement(Lib.ExternalBaseLib.GetExternalLibs()[0]);
+            AddNewElement(Lib.ExternalBaseLib.GetExternalLibs()[1]);
         }
-
         public static AbstrUIBase TryGenUiControl(int id)
         {
             if (HasID(id))
@@ -93,6 +76,20 @@ namespace ArdClock.ArdPage.HelpingClass
                 _funcsXmlWriters[externalLib.ID]    = externalLib.XMLWriter;
                 _funcsUIConstruct[externalLib.ID]   = externalLib.UIConstruct;
             }
+        }
+        public static System.Xml.XmlElement TryWriteToXml(AbstrPageEl pl, System.Xml.XmlDocument xdd)
+        {
+            byte tp = pl.GetTypeEl();
+
+            if (HasID(tp))
+                return _funcsXmlWriters[tp](pl, xdd);
+            return null;
+        }
+        public static AbstrPageEl TryLoadFromXml(int id, System.Xml.XmlNode nd)
+        {
+            if (HasID(id))
+                return _funcsXmlLoaders[id](nd);
+            return null;
         }
     }
 }
