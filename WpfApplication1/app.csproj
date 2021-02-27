@@ -105,7 +105,6 @@
     <Compile Include="src\ArdPage\HelpingClass\PageElCenter.cs" />
     <Compile Include="src\ArdPage\HelpingClass\PageElCenterPartials\PELCenterXMLLoaders.cs" />
     <Compile Include="src\ArdPage\HelpingClass\PageElCenterPartials\PELCenterXMLWriters.cs" />
-    <Compile Include="src\ArdPage\PageElements\PageClear.cs" />
     <Compile Include="src\ArdPage\PageElements\PageString.cs" />
     <Compile Include="src\ArdPage\PageElements\PageTime.cs" />
     <Compile Include="src\ArdPage\APage.cs" />
