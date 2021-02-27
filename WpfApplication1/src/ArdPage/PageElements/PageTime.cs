@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ArdClock.src.ArdPage.HelpingClass;
 
-namespace ArdClock.src.ArdPage.PageElements
+using BaseLib;
+using BaseLib.HelpingClass;
+
+namespace ArdClock.ArdPage.PageElements
 {
     class PageTime : PageEl
     {

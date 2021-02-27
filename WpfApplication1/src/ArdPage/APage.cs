@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ArdClock.src.HelpingClass;
-using ArdClock.src.ArdPage.PageElements;
-using ArdClock.src.UIGenerate;
+using ArdClock.HelpingClass;
+using ArdClock.ArdPage.PageElements;
+using ArdClock.UIGenerate;
 
 using BaseLib;
 
-namespace ArdClock.src.ArdPage
+namespace ArdClock.ArdPage
 {
     /*
      Объявление всех классов, которые будут хранить

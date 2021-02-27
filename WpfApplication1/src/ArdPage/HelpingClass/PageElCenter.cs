@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ArdClock.src.ArdPage;
-using ArdClock.src.UIGenerate;
-using ArdClock.src.ArdPage.PageElements;
+using ArdClock.ArdPage;
+using ArdClock.UIGenerate;
+using ArdClock.ArdPage.PageElements;
 
 using BaseLib;
 
-namespace ArdClock.src.ArdPage.HelpingClass
+namespace ArdClock.ArdPage.HelpingClass
 {
     public static partial class PageElCenter
     {
