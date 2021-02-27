@@ -16,7 +16,7 @@ namespace ArdClock.ArdPage.HelpingClass
         private static BaseConstruct[] _funcsConstruct = new BaseConstruct[128];
         private static BaseXMLLoader[] _funcsXmlLoaders = new BaseXMLLoader[128];
         private static BaseXMLWriter[] _funcsXmlWriters = new BaseXMLWriter[128];
-        public static BaseUIConstruct[] _funcsUIConstruct = new BaseUIConstruct[128];
+        private static BaseUIConstruct[] _funcsUIConstruct = new BaseUIConstruct[128];
 
         static private List<int> _index = new List<int>();
         static private Dictionary<int, string> _namesPageEl = new Dictionary<int,string>();
@@ -29,25 +29,22 @@ namespace ArdClock.ArdPage.HelpingClass
         static PageElCenter()
         {
             _index.Add(TBaseEl);
-            _index.Add(TString);
-            _index.Add(TTime);
             _index.Add(TClearCode);
 
-            _namesPageEl.Add(TString, "String");
-            _namesPageEl.Add(TTime, "Time");
+            ExternalLib elString = new ExternalLib(TString, "String",
+                () => new PageString(),
+                (pEl) => new UIPageString(pEl),
+                (nd) => ReadLikePageString(nd),
+                (ps, xd) => XmlElFromPageString(ps, xd));
 
-            _funcsConstruct[TBaseEl] = () => new PageEl();
-            _funcsConstruct[TString] = () => new PageString();
-            _funcsConstruct[TTime] = () => new PageTime();
+            ExternalLib elTime = new ExternalLib(TTime, "Time",
+                () => new PageTime(),
+                (pEl) => new UIPageTime(pEl),
+                (nd) => ReadLikePageTime(nd),
+                (ps, xd) => XmlElFromPageTime(ps, xd));
 
-            _funcsXmlLoaders[TString] = (nd) => ReadLikePageString(nd);
-            _funcsXmlLoaders[TTime] = (nd) => ReadLikePageTime(nd);
-
-            _funcsXmlWriters[TString] = (ps, xd) => XmlElFromPageString(ps, xd);
-            _funcsXmlWriters[TTime] = (ps, xd) => XmlElFromPageTime(ps, xd);
-
-            _funcsUIConstruct[TString] = (pEl) => new UIPageString(pEl);
-            _funcsUIConstruct[TTime] = (pEl) => new UIPageTime(pEl);
+            AddNewElement(elString);
+            AddNewElement(elTime);
         }
 
         public static AbstrUIBase TryGenUiControl(int id)
@@ -83,11 +80,20 @@ namespace ArdClock.ArdPage.HelpingClass
         public static Dictionary<int,string> getDict()
         { return _namesPageEl; }
 
-        public static void AddNewElement(int id)
+        public static void AddNewElement(ExternalLib externalLib)
         {
-            if (!HasID(id))
+            if (!HasID(externalLib.ID))
             {
 
+                _index.Add(externalLib.ID);
+
+                _namesPageEl.Add(externalLib.ID,
+                                 externalLib.Name);
+
+                _funcsConstruct[externalLib.ID]     = externalLib.Construct;
+                _funcsXmlLoaders[externalLib.ID]    = externalLib.XMLLoader;
+                _funcsXmlWriters[externalLib.ID]    = externalLib.XMLWriter;
+                _funcsUIConstruct[externalLib.ID]   = externalLib.UIConstruct;
             }
         }
     }
