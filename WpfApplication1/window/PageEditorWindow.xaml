@@ -1,0 +1,26 @@
+﻿<Window x:Class="ArdClock.window.PageEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Window1" Height="300" Width="737" DataContext="{Binding}">
+    <Grid>
+        <ListBox HorizontalAlignment="Left" Margin="12,12,0,41" Name="list_page_name" Width="175" SelectionChanged="listBox1_SelectionChanged" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="193,0,0,0" BorderBrush="Black" BorderThickness="1">
+        <StackPanel Name="elementsPageStackPanel" Orientation="Vertical" Background="#FFF2F2F2">
+            <StackPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить" MouseEnter="MenuItemAdd_MouseEnter"/>
+                        <MenuItem Header="Сохранить" Click="MenuUpdate"/>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Popup x:Name="popup1" StaysOpen="False" Placement="MousePoint" AllowsTransparency="True" MouseLeave="popup1_MouseLeave" MouseEnter="popup1_MouseEnter" PopupAnimation="Slide" Visibility="Visible" Panel.ZIndex="-1">
+            <TextBlock Name="popupTextBox"  TextWrapping="Wrap" Background="LightPink" Opacity="0.8">
+            Сохранено</TextBlock>
+        </Popup>
+        <Button Content="Активировать" HorizontalAlignment="Left" Margin="12,0,0,12" Name="button_Activate" Width="175" Height="23" VerticalAlignment="Bottom" />
+    </Grid>
+</Window>
