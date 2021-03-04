@@ -31,6 +31,8 @@ namespace ArdClock.window
         public List<APage> pageList { get; private set; }
         private List<AbstrUIBase> UIControlList;
         public APage curPage { get; private set; }
+        int _curPageIndex;
+        TextBox _curPageName;
 
         public string pathToXML = System.Environment.CurrentDirectory + "\\ListPages.xml";
 
@@ -44,20 +46,18 @@ namespace ArdClock.window
             timerPopup = new System.Windows.Threading.DispatcherTimer();
             timerPopup.Tick += ClosePopup;
 
-            pageList = Loader.LoadPageListFromXML(pathToXML);
 
             UIControlList = new List<AbstrUIBase>();
 
-            if (pageList.Count > 0)
-            {
-                list_page_name.ItemsSource = pageList;
-            }
+            UpdateListPage();
         }
 
         // Вывод интефейса для редактирования элементов 
         // страницы
         private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            _curPageIndex = list_page_name.SelectedIndex != -1 ?
+                list_page_name.SelectedIndex : _curPageIndex;
             UpdateListPageEl();
         }
 
@@ -70,9 +70,12 @@ namespace ArdClock.window
             {
                 elementsPageStackPanel.Children.Clear();
 
-                Label pageNameLabel = new Label();
-                pageNameLabel.Content = curPage.Name;
-                elementsPageStackPanel.Children.Add(pageNameLabel);
+                _curPageName = new TextBox();
+                _curPageName.Text = curPage.Name;
+                _curPageName.Width = 256;
+                _curPageName.TextAlignment = TextAlignment.Center;
+
+                elementsPageStackPanel.Children.Add(_curPageName);
 
                 for (int i = 0; i < UIControlList.Count; i++)
                 {
@@ -87,7 +90,8 @@ namespace ArdClock.window
                 }
             }
         }
-
+        public void ClearListPageEl() 
+        { elementsPageStackPanel.Children.Clear(); }
         public void UpdateListPageEl(UIBaseEl new_el = null)
         {
             // Загружает информацию напрямую из сохранённой страницы
@@ -98,7 +102,7 @@ namespace ArdClock.window
 
             APage editPage = pageList[list_page_name.SelectedIndex];
 
-            elementsPageStackPanel.Children.Clear();
+            ClearListPageEl();
 
             if (new_el != null)
                 editPage.Elements.Add(new_el.CompileElement());
@@ -116,6 +120,11 @@ namespace ArdClock.window
             SoftUpdate();
         }
 
+        public void UpdateListPage() 
+        {
+            pageList = Loader.LoadPageListFromXML(pathToXML);
+            list_page_name.ItemsSource = pageList;
+        }
         private void CreateNewUIel(AbstrPageEl el) 
         {
             AbstrUIBase UIel = PageElCenter.TryGenUiControl(el);
@@ -146,6 +155,14 @@ namespace ArdClock.window
             UIControlList[u2] = u_tmp;
             SoftUpdate();
         }
+        private void SavePageList()
+        {
+            Writer.WritePageListToXML(pageList, pathToXML);
+            UpdateListPage();
+            UpdateListPageEl();
+        }
+
+
         //
         // Events
         //
@@ -159,20 +176,14 @@ namespace ArdClock.window
                 new_elements.Add(UIel.CompileElement());
             }
 
-            if (new_elements.Count >= 1)
-            {
-                curPage = new APage(curPage.Name, curPage.ID, new_elements);
+            curPage = new APage(_curPageName.Text, curPage.ID, new_elements);
 
-                if (list_page_name.SelectedIndex != -1)
-                    pageList[list_page_name.SelectedIndex] = curPage;
+            if (list_page_name.Items.Count > _curPageIndex)
+                pageList[_curPageIndex] = curPage;
 
-                Writer.WritePageListToXML(pageList, pathToXML);
-                UpdateListPageEl();
-
-                ShowPopup(String.Format(
-                    "Сохранено: {0} эл.", new_elements.Count.ToString()));
-            }
-            else { ShowPopup("Ничего не сохранено :("); }
+            SavePageList();
+            ShowPopup(String.Format(
+                "Сохранено: {0} эл.", new_elements.Count.ToString()));
         }
 
         private void UIPageEl_DelClick(object sender, EventArgs e)
@@ -268,8 +279,31 @@ namespace ArdClock.window
         }
         // Context Menu: Update
         public void MenuUpdate(object sender, RoutedEventArgs e)
+        { SavePageList(); }
+
+        private void MenuItemListPageUpdate_Click(object sender, RoutedEventArgs e)
         {
-            button_Save_Click(this, null);
+            ClearListPageEl();
+            UpdateListPage();
+        }
+
+        private void MenuItemListPageNew_Click(object sender, RoutedEventArgs e) 
+        {
+            Random rnd = new Random();
+            pageList.Add(new APage("NewPage", rnd.Next(), new List<AbstrPageEl>()));
+            SavePageList();
+            UpdateListPage();
+        }
+        private void MenuItemListPageDel_Click(object sender, RoutedEventArgs e) 
+        {
+            int selectPage = list_page_name.SelectedIndex;
+            
+            if (selectPage != -1) 
+            {
+                ClearListPageEl();
+                pageList.RemoveAt(selectPage);
+                SavePageList();
+            }
         }
 
         //
