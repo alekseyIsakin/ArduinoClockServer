@@ -23,7 +23,7 @@ namespace BaseLib
         public Panel Container { get; protected set; }
 
         public event EventHandler DelClick;
-        public event EventHandler Drop;
+        public new event EventHandler Drop;
 
         public abstract AbstrPageEl CompileElement();
 
