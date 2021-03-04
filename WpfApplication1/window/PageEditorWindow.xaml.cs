@@ -81,7 +81,7 @@ namespace ArdClock.window
                     el.Container.Background =
                         (i % 2 == 0) ? Brushes.WhiteSmoke : Brushes.LightGray;
 
-                    elementsPageStackPanel.Children.Add(UIControlList[i].Container);
+                    elementsPageStackPanel.Children.Add(UIControlList[i]);
                     elementsPageStackPanel.Children.Add(
                     UIGenerateHelping.NewSeparator(1, Brushes.Black));
                 }
