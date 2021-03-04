@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app", "WpfApplication1\app.csproj", "{14DE71E9-C09E-493E-93FB-AB472BF37409}"
 	ProjectSection(ProjectDependencies) = postProject
+		{0CCAB0A7-899C-414A-A3F2-E6A14D17A0A6} = {0CCAB0A7-899C-414A-A3F2-E6A14D17A0A6}
 		{630B22F5-3F3E-4FAA-BB07-B1ABC619369D} = {630B22F5-3F3E-4FAA-BB07-B1ABC619369D}
 	EndProjectSection
 EndProject
