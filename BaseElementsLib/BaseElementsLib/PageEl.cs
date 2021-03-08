@@ -31,8 +31,8 @@ namespace BaseLib
         public List<byte> GeSendtPos()
         {
             List<byte> lout = new List<byte>();
-            lout.Add((byte)(X / 2));
-            lout.Add((byte)(Y / 2));
+            lout.Add((byte)(X));
+            lout.Add((byte)(Y));
             return lout;
         }
 
