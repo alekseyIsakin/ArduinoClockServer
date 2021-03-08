@@ -117,10 +117,10 @@ namespace BaseLib.HelpingClass
         {
             List<byte> lout = new List<byte>();
 
-            lout.Add((byte)(block1 / 2));
+            lout.Add((byte)(block1));
             // #### ####
             // ^^^^
-            lout.Add((byte)(block2 / 2));
+            lout.Add((byte)(block2));
             // #### ####
             //      ^^^^
 
