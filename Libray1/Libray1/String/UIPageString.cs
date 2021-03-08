@@ -20,7 +20,7 @@ namespace Lib.String
             Content = Container;
         }
         public UIPageString(AbstrPageEl pEl)
-            : base(60)
+            : base(60, pEl)
         {
             PageString ps = (PageString)pEl;
             SetID (PageString.ID);

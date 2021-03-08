@@ -14,20 +14,24 @@ namespace BaseLib
 
     public abstract class AbstrUIBase : UserControl
     {
-        protected override void OnInitialized(EventArgs e)
-        { base.OnInitialized(e); }
-        public int ID { get; protected set; }
-
-        public abstract void SetID(int id);
-
-        public Panel Container { get; protected set; }
-
         public event EventHandler DelClick;
         public new event EventHandler Drop;
 
+        public readonly string NamePageEl;
+
+        public Panel Container { get; protected set; }
+
+        public int ID { get; protected set; }
+        public abstract void SetID(int id);
+
+        public AbstrUIBase(string Name) 
+        { NamePageEl = Name; }
+        protected override void OnInitialized(EventArgs e)
+        { base.OnInitialized(e); }
+
         public abstract AbstrPageEl CompileElement();
 
-        protected void RaiseDelClick(object sender, EventArgs e)
+        public void RaiseDelClick(object sender, EventArgs e)
         {
             if (DelClick != null)
                 DelClick.Invoke(this, e);

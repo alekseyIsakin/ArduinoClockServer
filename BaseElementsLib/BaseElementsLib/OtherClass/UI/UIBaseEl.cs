@@ -11,33 +11,21 @@ namespace BaseLib.HelpingClass
 {
     public class UIBaseEl : AbstrUIBase
     {
-        protected ContextMenu DPContextMenu;
         protected Label labl_ID;
 
-        public UIBaseEl(int Height)
+        public UIBaseEl(int Height, AbstrPageEl Pel) : base (Pel.GetNameEl())
         {
             labl_ID = new Label();
             labl_ID.VerticalAlignment = VerticalAlignment.Center;
             labl_ID.Uid = "lblID";
 
-            DPContextMenu = new ContextMenu();
-            MenuItem miName = new MenuItem();
-            MenuItem mi = new MenuItem();
-            
-            mi.Header = "Удалить";
-            mi.Click += RaiseDelClick;
-
-            DPContextMenu.Items.Add(mi);
-
             Container = new DockPanel();
             ((DockPanel)Container).LastChildFill = false;
-            Container.Height = Height;
 
-            Container.ContextMenu = DPContextMenu;
+            Container.Height = Height;
             Container.AllowDrop = true;
 
             Container.Children.Add(labl_ID);
-
             Container.Children.Add(
                 UIGenerateHelping.NewGridSplitter(10, Container.Background));
 
