@@ -16,14 +16,7 @@
             </ListBox.ContextMenu>
         </ListBox>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="193,0,0,0" BorderBrush="Black" BorderThickness="1">
-            <StackPanel Name="elementsPageStackPanel" Orientation="Vertical" Background="#FFF2F2F2">
-            <StackPanel.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Добавить" MouseEnter="MenuItemAdd_MouseEnter"/>
-                        <MenuItem Header="Сохранить" Click="button_Save_Click"/>
-                </ContextMenu>
-            </StackPanel.ContextMenu>
-            </StackPanel>
+            <StackPanel Name="elementsPageStackPanel" Orientation="Vertical" Background="#FFF2F2F2"/>
         </ScrollViewer>
 
         <Popup x:Name="popup1" StaysOpen="False" Placement="MousePoint" AllowsTransparency="True" MouseLeave="popup1_MouseLeave" MouseEnter="popup1_MouseEnter" PopupAnimation="Slide" Visibility="Visible" Panel.ZIndex="-1">
