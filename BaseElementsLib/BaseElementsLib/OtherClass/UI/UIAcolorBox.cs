@@ -13,64 +13,69 @@ namespace BaseLib.HelpingClass
 {
     public class UIAcolorBox : UserControl
     {
-        private DockPanel dp;
-        private AColor clr;
-        private TextBox tbC;
-        private Rectangle rectC;
-
+        private DockPanel Container;
+        private AColor SendColor;
+        private TextBox TextBoxColor;
+        private Rectangle RectColor;
+        ColorBoxSelect ColorSelecter;
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            Content = dp;
+            Content = Container;
         }
 
         public UIAcolorBox(Color clr_in)
             : base()
         {
 
-            dp = new DockPanel();
-            tbC = new TextBox();
-            rectC = new Rectangle();
+            Container = new DockPanel();
+            TextBoxColor = new TextBox();
+            RectColor = new Rectangle();
+            ColorSelecter = new ColorBoxSelect();
 
             Label lbl_clr = new Label();
 
-            clr = new AColor();
-            clr.SetFromColor(clr_in);
+            SendColor = new AColor();
+            SendColor.SetFromColor(clr_in);
 
             lbl_clr.Content = "Цвет";
             lbl_clr.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-            tbC.Text = clr.ToHex();
+            TextBoxColor.Text = SendColor.ToHex();
 
-            tbC.Width = 65;
-            tbC.Height = 23;
-            tbC.TextAlignment = TextAlignment.Center;
-            tbC.MaxLength = 6;
+            TextBoxColor.Width = 65;
+            TextBoxColor.Height = 23;
+            TextBoxColor.TextAlignment = TextAlignment.Center;
+            TextBoxColor.MaxLength = 6;
 
-            rectC.Fill = new SolidColorBrush(clr_in);
-            rectC.Stroke = Brushes.Black;
-            rectC.StrokeThickness = 3;
+            RectColor.Fill = new SolidColorBrush(clr_in);
+            RectColor.Stroke = Brushes.Black;
+            RectColor.StrokeThickness = 3;
 
-            rectC.Width = 23;
-            rectC.Height = 23;
+            RectColor.Width = 23;
+            RectColor.Height = 23;
 
-            rectC.ContextMenu = genContextMenu();
+            RectColor.ContextMenu = genContextMenu();
 
-            //rectC.MouseLeftButtonDown +=
+            ColorSelecter.ColorChange += UpdateColorRect;
+            ColorSelecter.SetFromColor(SendColor.GetColor());
 
-            dp.Children.Add(lbl_clr);
-            dp.Children.Add(tbC);
-            dp.Children.Add(rectC);
-            dp.LastChildFill = false;
+            Container.Children.Add(lbl_clr);
+            Container.Children.Add(TextBoxColor);
+            Container.Children.Add(RectColor);
+            Container.Children.Add(ColorSelecter);
+            Container.LastChildFill = false;
         }
 
         public Color GeBoxColor()
         {
             try
-            { clr.SetFromHex(tbC.Text); }
+            {
+                SendColor.SetFromHex(TextBoxColor.Text); 
+            }
             catch
             { return Colors.White; }
 
-            return clr.GetColor(); 
+            return SendColor.GetColor(); 
         }
 
         private ContextMenu genContextMenu() 
@@ -105,9 +110,99 @@ namespace BaseLib.HelpingClass
                 if (AColors.AColorsDict.ContainsKey(header)) 
                 {
                     clr = AColors.AColorsDict[header];
-                    tbC.Text = clr.ToHex();
-                    rectC.Fill = new SolidColorBrush(clr.GetColor());
+                    TextBoxColor.Text = clr.ToHex();
+                    RectColor.Fill = new SolidColorBrush(clr.GetColor());
+                    ColorSelecter.SetFromColor(clr.GetColor());
                 }
+            }
+        }
+        private void UpdateColorRect(object sender, EventArgs e) 
+        {
+            if (sender is ColorBoxSelect)
+            {
+                SendColor.SetFromColor(
+                    Color.FromRgb(
+                        (sender as ColorBoxSelect).ColorValuePairs['R'],
+                        (sender as ColorBoxSelect).ColorValuePairs['G'],
+                        (sender as ColorBoxSelect).ColorValuePairs['B']));
+                RectColor.Fill = new SolidColorBrush(SendColor.GetColor());
+                TextBoxColor.Text = SendColor.ToHex();
+            }
+        }
+    }
+
+    class ColorBoxSelect : UserControl 
+    {
+        public event EventHandler ColorChange;
+        public Dictionary<char, byte> ColorValuePairs;
+
+        Slider SliderR;
+        Slider SliderG;
+        Slider SliderB;
+
+        protected override void OnInitialized(EventArgs e)
+        { base.OnInitialized(e); }
+
+        public ColorBoxSelect() 
+        {
+            int _height = 10;
+            int _width = 100;
+
+            ColorValuePairs = new Dictionary<char, byte>();
+
+            StackPanel sp = new StackPanel();
+            SliderR = new Slider();
+            SliderG = new Slider();
+            SliderB = new Slider();
+
+            SliderR.LargeChange = 8;
+            SliderG.LargeChange = 16;
+            SliderB.LargeChange = 8;
+
+            SliderR.Uid = "R";
+            SliderG.Uid = "G";
+            SliderB.Uid = "B";
+
+            ColorValuePairs.Add(SliderR.Uid[0], 0);
+            ColorValuePairs.Add(SliderG.Uid[0], 0);
+            ColorValuePairs.Add(SliderB.Uid[0], 0);
+
+            SliderR.Maximum = 255;
+            SliderG.Maximum = 255;
+            SliderB.Maximum = 255;
+
+            SliderR.Height = _height;
+            SliderG.Height = _height;
+            SliderB.Height = _height;
+
+            SliderR.Width = _width;
+            SliderG.Width = _width;
+            SliderB.Width = _width;
+
+            SliderR.ValueChanged += Slider_ValueChanged;
+            SliderG.ValueChanged += Slider_ValueChanged;
+            SliderB.ValueChanged += Slider_ValueChanged;
+
+            sp.Children.Add(SliderR);
+            sp.Children.Add(SliderG);
+            sp.Children.Add(SliderB);
+
+            Content = sp;
+        }
+
+        public void SetFromColor(Color clr) 
+        {
+            SliderR.Value = clr.R;
+            SliderG.Value = clr.G;
+            SliderB.Value = clr.B;
+        }
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (sender is Slider)
+            {
+                ColorValuePairs[(sender as Slider).Uid[0]] = (byte)(sender as Slider).Value;
+                if (ColorChange != null)
+                    ColorChange(this, null);
             }
         }
     }
