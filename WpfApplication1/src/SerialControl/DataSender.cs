@@ -74,8 +74,8 @@ namespace ArdClock.SerialControl
         private void TrySend(List<byte> byteArr) 
         {
             if (ReadyToSend)
-            {
-                try
+                {
+                    try
                 {
                     SPort.Write(byteArr.ToArray(), 0, byteArr.Count);
                     ReadyToSend = false;
