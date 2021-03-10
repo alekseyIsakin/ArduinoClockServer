@@ -9,10 +9,10 @@ namespace ArdClock.ArdPage
 {
     public static partial class PageElCenter
     {
-        private static BaseConstruct[] _funcsConstruct = new BaseConstruct[128];
-        private static BaseXMLLoader[] _funcsXmlLoaders = new BaseXMLLoader[128];
-        private static BaseXMLWriter[] _funcsXmlWriters = new BaseXMLWriter[128];
-        private static BaseUIConstruct[] _funcsUIConstruct = new BaseUIConstruct[128];
+        private static Dictionary<int, BaseConstruct> _funcsConstruct = new Dictionary<int, BaseConstruct>();
+        private static Dictionary<int, BaseXMLLoader> _funcsXmlLoaders = new Dictionary<int, BaseXMLLoader>();
+        private static Dictionary<int, BaseXMLWriter> _funcsXmlWriters = new Dictionary<int, BaseXMLWriter>();
+        private static Dictionary<int, BaseUIConstruct> _funcsUIConstruct = new Dictionary<int, BaseUIConstruct>();
 
         static private List<int> _index = new List<int>();
         static private Dictionary<int, string> _namesPageEl = new Dictionary<int,string>();
@@ -71,10 +71,10 @@ namespace ArdClock.ArdPage
                 _namesPageEl.Add(externalLib.ID,
                                  externalLib.Name);
 
-                _funcsConstruct[externalLib.ID]     = externalLib.Construct;
-                _funcsXmlLoaders[externalLib.ID]    = externalLib.XMLLoader;
-                _funcsXmlWriters[externalLib.ID]    = externalLib.XMLWriter;
-                _funcsUIConstruct[externalLib.ID]   = externalLib.UIConstruct;
+                _funcsConstruct.Add  (externalLib.ID, externalLib.Construct);
+                _funcsXmlLoaders.Add (externalLib.ID, externalLib.XMLLoader);
+                _funcsXmlWriters.Add (externalLib.ID, externalLib.XMLWriter);
+                _funcsUIConstruct.Add(externalLib.ID, externalLib.UIConstruct);
             }
         }
         public static System.Xml.XmlElement TryWriteToXml(AbstrPageEl pl, System.Xml.XmlDocument xdd)
