@@ -10,7 +10,7 @@ namespace Lib.Time
 { 
     public class PageTime : PageEl
     {
-        public new const byte ID = 66;
+        public new const byte ID = (int)Elements.TIME;
         public new const string Name = "Time";
 
         public override byte GetTypeEl()
