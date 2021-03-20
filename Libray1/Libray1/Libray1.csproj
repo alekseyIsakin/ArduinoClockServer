@@ -49,6 +49,10 @@
     <Compile Include="CustomString\CustomStringXMLWriters.cs" />
     <Compile Include="CustomString\UIPageCustomString.cs" />
     <Compile Include="ExternalBaseLib.cs" />
+    <Compile Include="Mail\PageMails.cs" />
+    <Compile Include="Mail\MailsXMLLoaders.cs" />
+    <Compile Include="Mail\MailsXMLWriters.cs" />
+    <Compile Include="Mail\UIPageMails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="String\PageString.cs">
       <SubType>Code</SubType>
@@ -71,7 +75,9 @@
       <Name>BaseElementsLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Mail\.secret.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

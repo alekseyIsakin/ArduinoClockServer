@@ -10,6 +10,12 @@ using Lib.Time;
 
 namespace Lib
 {
+    enum Elements 
+    {
+        STRING = 65,
+        TIME = 66,
+        MAIL
+    }
     static public class ExternalBaseLib
     {
         static public List<ExternalLib> GetExternalLibs() 

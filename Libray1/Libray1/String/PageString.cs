@@ -10,7 +10,7 @@ namespace Lib.String
 {
     public class PageString : PageEl
     {
-        public new const byte ID = 65;
+        public new const byte ID = (int)Elements.STRING;
         public new const string Name = "String";
         public override byte GetTypeEl()
         { return ID; }
