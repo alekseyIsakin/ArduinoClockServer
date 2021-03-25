@@ -10,7 +10,7 @@ namespace ArdClock.SerialControl
 {
     class DataSender
     {
-        public event EventHandler TimerIsOver;
+        public event EventHandler AvailSend;
         public event EventHandler SuccSend;
 
         const int TIME_WAIT = 2; // время на обработку отправки
@@ -21,7 +21,7 @@ namespace ArdClock.SerialControl
 
         public int BaudRate{ get; private set; }
         public string PortName{ get; private set; }
-        private SerialPort SPort;
+        private readonly SerialPort SPort;
 
         public DataSender() : this("None", 300) { }
  
@@ -58,8 +58,7 @@ namespace ArdClock.SerialControl
 
         public void Send(ArdPage.APage page)
         {
-            List<byte> arrOut = new List<byte>();
-            arrOut = page.GenSendData();
+            List<byte> arrOut = page.GenSendData();
 
             if (arrOut.Count == 0)
                 return;
@@ -79,8 +78,7 @@ namespace ArdClock.SerialControl
                     SPort.Write(byteArr.ToArray(), 0, byteArr.Count);
                     ReadyToSend = false;
 
-                    if (SuccSend != null)
-                        SuccSend(this, null);
+                    SuccSend?.Invoke(this, null);
 
                     timer.Start();
                 }
@@ -92,8 +90,7 @@ namespace ArdClock.SerialControl
         {
             ReadyToSend = true;
 
-            if (TimerIsOver != null)
-                TimerIsOver(this, null);
+            AvailSend?.Invoke(this, null);
 
             timer.Stop();
         }

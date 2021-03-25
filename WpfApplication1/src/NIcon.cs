@@ -10,51 +10,48 @@ namespace ArdClock.src
         public delegate void NIconHandler(object sender, EventArgs e);
 
         public event NIconHandler Click;
-        public event NIconHandler DoubleClick;
         public event NIconHandler ContextMenuClose;
         public event NIconHandler ContextMenuConnect;
 
-        public System.Windows.Forms.NotifyIcon notifyIcon {get; private set;}
+        public System.Windows.Forms.NotifyIcon NotifyIcon {get; private set;}
 
-        public NIcon(System.Windows.Media.ImageSource icn) 
+        public NIcon() 
         {
-            notifyIcon = new System.Windows.Forms.NotifyIcon();
-            notifyIcon.Click += notifyIcon_Click;
-            notifyIcon.DoubleClick += notifyIcon_DoubleClick;
+            NotifyIcon = new System.Windows.Forms.NotifyIcon();
+            NotifyIcon.Click += NotifyIcon_Click;
 
-            SetIcon(false);
-            notifyIcon.Visible = true;
+            ToggleIcon(false);
+            NotifyIcon.Visible = true;
 
             var cm = new System.Windows.Forms.ContextMenuStrip();
             var itClose = new System.Windows.Forms.ToolStripMenuItem("Close");
             var itConnect = new System.Windows.Forms.ToolStripMenuItem("Connect");
 
-            itClose.Click += onClose;
-            itConnect.Click += onConnect;
+            itClose.Click += OnClose;
+            itConnect.Click += OnConnect;
 
             cm.Items.AddRange(new[] { itClose, itConnect });
 
-            notifyIcon.ContextMenuStrip = cm;
+            NotifyIcon.ContextMenuStrip = cm;
         }
 
         public void Dispose()
         {
-            notifyIcon.Dispose();
+            NotifyIcon.Icon = null;
+            NotifyIcon.Dispose();
         }
 
-        public void notifyIcon_Click(object sender, EventArgs e)
+        public void NotifyIcon_Click(object sender, EventArgs e)
             { Click(this, e); }
-        public void notifyIcon_DoubleClick(object sender, EventArgs e)
-            { DoubleClick(this, e);}
 
-        public void onClose(object sender, EventArgs e)
+        public void OnClose(object sender, EventArgs e)
             { ContextMenuClose(this, e); }
-        public void onConnect(object sender, EventArgs e)
+        public void OnConnect(object sender, EventArgs e)
             { ContextMenuConnect(this, e);  }
 
-        public void SetIcon(bool state) 
+        public void ToggleIcon(bool state) 
         {
-            notifyIcon.Icon = state ? Properties.Resources.OK_icon :
+            NotifyIcon.Icon = state ? Properties.Resources.OK_icon :
                                       Properties.Resources.NO_icon;
         }
     }
