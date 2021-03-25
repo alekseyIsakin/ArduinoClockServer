@@ -59,9 +59,8 @@ namespace Lib.String
                 color = new AColor(clr_hex);
                 out_pageEl = new PageString(b_pos_x, b_pos_y, color, b_sz, dt_str);
             }
-            catch (Exception e)
-            {
-            }
+            catch
+            {}
             return out_pageEl;
         }
     }

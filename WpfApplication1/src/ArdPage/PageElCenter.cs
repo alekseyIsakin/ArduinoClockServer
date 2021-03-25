@@ -9,24 +9,20 @@ namespace ArdClock.ArdPage
 {
     public static partial class PageElCenter
     {
-        private static Dictionary<int, BaseConstruct> _funcsConstruct = new Dictionary<int, BaseConstruct>();
-        private static Dictionary<int, BaseXMLLoader> _funcsXmlLoaders = new Dictionary<int, BaseXMLLoader>();
-        private static Dictionary<int, BaseXMLWriter> _funcsXmlWriters = new Dictionary<int, BaseXMLWriter>();
-        private static Dictionary<int, BaseUIConstruct> _funcsUIConstruct = new Dictionary<int, BaseUIConstruct>();
+        private static readonly Dictionary<int, BaseConstruct> _funcsConstruct = new Dictionary<int, BaseConstruct>();
+        private static readonly Dictionary<int, BaseXMLLoader> _funcsXmlLoaders = new Dictionary<int, BaseXMLLoader>();
+        private static readonly Dictionary<int, BaseXMLWriter> _funcsXmlWriters = new Dictionary<int, BaseXMLWriter>();
+        private static readonly Dictionary<int, BaseUIConstruct> _funcsUIConstruct = new Dictionary<int, BaseUIConstruct>();
 
-        static private List<int> _index = new List<int>();
-        static private Dictionary<int, string> _namesPageEl = new Dictionary<int,string>();
-
-        const int TBaseEl = 0;
-        const int TClearCode = 127;
+        static private readonly List<int> _index = new List<int>();
+        static private readonly Dictionary<int, string> _namesPageEl = new Dictionary<int,string>();
 
         static PageElCenter()
         {
-            _index.Add(PageEl.ID);
             _index.Add(PageClear.ID);
 
-            AddNewElement(Lib.ExternalBaseLib.GetExternalLibs()[0]);
-            AddNewElement(Lib.ExternalBaseLib.GetExternalLibs()[1]);
+            foreach (var LibEL in Lib.ExternalBaseLib.GetExternalLibs()) 
+            { AddNewElement(LibEL); }
         }
         public static AbstrUIBase TryGenUiControl(int id)
         {
@@ -43,7 +39,7 @@ namespace ArdClock.ArdPage
             return null;
         }
 
-        public static AbstrPageEl getNewPageElFromID(int id)
+        public static AbstrPageEl GetNewPageElFromID(int id)
         {
             if (HasID(id))
                 return _funcsConstruct[id]();
@@ -58,7 +54,7 @@ namespace ArdClock.ArdPage
             return false;
         }
 
-        public static Dictionary<int,string> getDict()
+        public static Dictionary<int,string> GetDict()
         { return _namesPageEl; }
 
         public static void AddNewElement(ExternalLib externalLib)
