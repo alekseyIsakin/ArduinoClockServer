@@ -13,7 +13,7 @@
 
             if (CurPage != null)
             {                 elementsPageStackPanel.Children.Clear();                  _curPageName = new TextBox();                 _curPageName.Text = CurPage.Name;                 _curPageName.Width = 256;                 _curPageName.TextAlignment = TextAlignment.Center;                  elementsPageStackPanel.Children.Add(_curPageName);                  for (int i = 0; i < UIControlList.Count; i++)                 {                     AbstrUIBase el = UIControlList[i];                     el.SetID(i);                     el.Container.Background =                         (i % 2 == 0) ? Brushes.WhiteSmoke : Brushes.LightGray;                      elementsPageStackPanel.Children.Add(UIControlList[i]);                     elementsPageStackPanel.Children.Add(                     UIGenerateHelping.NewSeparator(1, Brushes.Black));                 }             }         }         public void ClearListPageEl()
-        { elementsPageStackPanel.Children.Clear(); }         public void UpdateListPageEl(UIBaseEl new_el = null)         {
+        {              elementsPageStackPanel.Children.Clear();              System.GC.Collect();         }         public void UpdateListPageEl(UIBaseEl new_el = null)         {
             // Загружает информацию напрямую из сохранённой страницы
             //
             ClearListPageEl(); 
@@ -24,7 +24,8 @@
 
         // Загрузить список страниц заново
         public void UpdateListPage()
-        {             if (PageList != null) PageList.Clear();             PageList = Loader.LoadPageListFromXML(pathToXML);             list_page_name.ItemsSource = PageList;         }         private void CreateNewUIel(AbstrPageEl el)
+        {
+            if (PageList != null) PageList.Clear();             PageList = Loader.LoadPageListFromXML(pathToXML);             list_page_name.ItemsSource = PageList;             System.GC.Collect();         }         private void CreateNewUIel(AbstrPageEl el)
         {             AbstrUIBase UIel = PageElCenter.TryGenUiControl(el);             AddUItoList(UIel);         }
 
         private void CreateNewUIel(int ind)
