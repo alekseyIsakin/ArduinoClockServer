@@ -70,6 +70,9 @@ namespace ArdClock.ArdPage
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message); }
+
+            if (pageList.Count == 0) { pageList.Add(new APage()); }
+
             return pageList;
         }
         
