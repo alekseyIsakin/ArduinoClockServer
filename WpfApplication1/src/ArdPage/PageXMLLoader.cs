@@ -65,12 +65,14 @@ namespace ArdClock.ArdPage
             catch (System.IO.FileNotFoundException ex)
             {
                 MessageBox.Show("В директории не неайден существующий файл с настройками, поэтому будет создан новый.");
-                var ls = new List<APage>();
-                ls.Add(new APage());
-                WritePageListToXML(ls, fileName);
+                pageList.Add(new APage());
+                WritePageListToXML(pageList, fileName);
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message); }
+
+            if (pageList.Count == 0) { pageList.Add(new APage()); }
+
             return pageList;
         }
         
