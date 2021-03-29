@@ -7,7 +7,9 @@
 
         // Вывод интефейса для редактирования элементов 
         // страницы
-        private void ListBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)         {             _curPageIndex = list_page_name.SelectedIndex != -1 ?                 list_page_name.SelectedIndex : _curPageIndex;             UpdateListPageEl();         }          public void SoftUpdate()         {
+        private void ListBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)         {
+            _curPageIndex = list_page_name.SelectedIndex != -1 ?                 list_page_name.SelectedIndex : _curPageIndex;
+                         UpdateListPageEl();         }          public void SoftUpdate()         {
             // Загружает информацию о элементах на странице
             // из сохранённого списка
             //
@@ -29,7 +31,7 @@
         // Загрузить список страниц заново
         public void UpdateListPage()
         {
-            if (PageList != null) PageList.Clear();              PageList = PageElCenter.LoadPageListFromXML(pathToXML);             list_page_name.ItemsSource = PageList;              System.GC.Collect();         }         private void CreateNewUIel(AbstrPageEl el)
+            PageList = PageElCenter.LoadPageListFromXML(pathToXML);             list_page_name.ItemsSource = PageList;         }         private void CreateNewUIel(AbstrPageEl el)
         {             AbstrUIBase UIel = PageElCenter.TryGenUiControl(el);             AddUItoList(UIel);         }
 
         private void CreateNewUIel(int ind)
@@ -102,6 +104,7 @@
         {
              if (_curPageIndex != -1)
             {                 PageList.RemoveAt(_curPageIndex);
+                _curPageIndex = Math.Max(--_curPageIndex, 0);
 
                 SavePageList();
 
