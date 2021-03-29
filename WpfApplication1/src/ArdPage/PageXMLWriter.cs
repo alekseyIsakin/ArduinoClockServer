@@ -5,14 +5,12 @@ using System.Text;
 using System.Windows;
 using System.Xml;
 
-using ArdClock.ArdPage;
-
 using BaseLib.Xml;
 
 
-namespace ArdClock.XMLLoader
+namespace ArdClock.ArdPage
 {
-    static class Writer
+    public static partial class PageElCenter
     {
         static public void WritePageListToXML(List<APage> pageList, string fileName)
         {
@@ -49,7 +47,7 @@ namespace ArdClock.XMLLoader
                     {
                         foreach (var pageEl in page.Elements)
                         {
-                            var xmlEl = PageElCenter.TryWriteToXml(pageEl, xdd);
+                            var xmlEl = TryWriteToXml(pageEl, xdd);
 
                             if (xmlEl != null)
                                 xmlPage.AppendChild(xmlEl);

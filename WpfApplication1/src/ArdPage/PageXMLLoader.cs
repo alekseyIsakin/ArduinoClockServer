@@ -5,14 +5,12 @@ using System.Text;
 using System.Windows;
 using System.Xml;
 
-using ArdClock.ArdPage;
-
 using BaseLib;
 using BaseLib.Xml;
 
-namespace ArdClock.XMLLoader
+namespace ArdClock.ArdPage
 {
-    static class Loader
+    public static partial class PageElCenter
     {
         static public List<APage> LoadPageListFromXML(string fileName)
         {
@@ -48,7 +46,7 @@ namespace ArdClock.XMLLoader
                                         XMLDefines.XMLBaseElAttr.TypeEl
                                     ).Value);
 
-                                PageEl pl = (PageEl)PageElCenter.TryLoadFromXml(type_ep, nd_el);
+                                PageEl pl = (PageEl)TryLoadFromXml(type_ep, nd_el);
 
                                 if (pl != null)
                                 { page_elements.Add(pl); }
@@ -69,7 +67,7 @@ namespace ArdClock.XMLLoader
                 MessageBox.Show("В директории не неайден существующий файл с настройками, поэтому будет создан новый.");
                 var ls = new List<APage>();
                 ls.Add(new APage());
-                Writer.WritePageListToXML(ls, fileName);
+                WritePageListToXML(ls, fileName);
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message); }

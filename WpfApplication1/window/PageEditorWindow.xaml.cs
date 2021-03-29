@@ -1,4 +1,4 @@
-﻿using System; using System.Collections.Generic; using System.Linq; using System.Text; using System.Windows; using System.Windows.Controls; using System.Windows.Data; using System.Windows.Documents; using System.Windows.Input; using System.Windows.Media; using System.Windows.Media.Imaging; using System.Windows.Shapes; using System.Xml;  using ArdClock.ArdPage; using ArdClock.XMLLoader;  using BaseLib; using BaseLib.HelpingClass;  namespace ArdClock.window {
+﻿using System; using System.Collections.Generic; using System.Linq; using System.Text; using System.Windows; using System.Windows.Controls; using System.Windows.Data; using System.Windows.Documents; using System.Windows.Input; using System.Windows.Media; using System.Windows.Media.Imaging; using System.Windows.Shapes; using System.Xml;  using ArdClock.ArdPage; using ArdClock.ArdPage;  using BaseLib; using BaseLib.HelpingClass;  namespace ArdClock.window {
     /// <summary>     /// Логика взаимодействия для Window1.xaml     /// </summary>     ///  
 
     public partial class PageEditorWindow : Window     {         public List<APage> PageList { get; private set; }         private List<AbstrUIBase> UIControlList;         public APage CurPage { get; private set; }         int _curPageIndex;         TextBox _curPageName;          public static readonly string pathToXML = System.Environment.CurrentDirectory + "\\ListPages.xml";          System.Windows.Threading.DispatcherTimer timerPopup;          public PageEditorWindow()         {             InitializeComponent();             button_Activate.Click += (s, e) => Save_Click(s, e);              timerPopup = new System.Windows.Threading.DispatcherTimer();             timerPopup.Tick += ClosePopup;              UIControlList = new List<AbstrUIBase>();
@@ -29,7 +29,7 @@
         // Загрузить список страниц заново
         public void UpdateListPage()
         {
-            if (PageList != null) PageList.Clear();              PageList = Loader.LoadPageListFromXML(pathToXML);             list_page_name.ItemsSource = PageList;              System.GC.Collect();         }         private void CreateNewUIel(AbstrPageEl el)
+            if (PageList != null) PageList.Clear();              PageList = PageElCenter.LoadPageListFromXML(pathToXML);             list_page_name.ItemsSource = PageList;              System.GC.Collect();         }         private void CreateNewUIel(AbstrPageEl el)
         {             AbstrUIBase UIel = PageElCenter.TryGenUiControl(el);             AddUItoList(UIel);         }
 
         private void CreateNewUIel(int ind)
@@ -38,7 +38,7 @@
             tmp_TB .Text = page.Name;
             tmp_TB .Width = 256;
             tmp_TB.TextAlignment = TextAlignment.Center;              return tmp_TB;         }          private void Swap(int u1, int u2)
-        {             AbstrUIBase u_tmp = UIControlList[u1];             UIControlList[u1] = UIControlList[u2];             UIControlList[u2] = u_tmp;             SoftUpdate();         }         private void SavePageList()         {             Writer.WritePageListToXML(PageList, pathToXML);         }
+        {             AbstrUIBase u_tmp = UIControlList[u1];             UIControlList[u1] = UIControlList[u2];             UIControlList[u2] = u_tmp;             SoftUpdate();         }         private void SavePageList()         {             PageElCenter.WritePageListToXML(PageList, pathToXML);         }
 
 
         //

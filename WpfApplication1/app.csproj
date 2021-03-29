@@ -145,8 +145,8 @@
     <Compile Include="src\ArdPage\APage.cs" />
     <Compile Include="src\NIcon.cs" />
     <Compile Include="src\SerialControl\DataSender.cs" />
-    <Compile Include="src\XMLLoader\Loader.cs" />
-    <Compile Include="src\XMLLoader\Writer.cs" />
+    <Compile Include="src\ArdPage\PageXMLLoader.cs" />
+    <Compile Include="src\ArdPage\PageXMLWriter.cs" />
     <Compile Include="window\PageEditorWindow.xaml.cs">
       <DependentUpon>PageEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -231,6 +231,7 @@
       <Name>Libray1</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
