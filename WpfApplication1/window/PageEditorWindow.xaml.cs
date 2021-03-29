@@ -3,33 +3,41 @@
 
     public partial class PageEditorWindow : Window     {         public List<APage> PageList { get; private set; }         private List<AbstrUIBase> UIControlList;         public APage CurPage { get; private set; }         int _curPageIndex;         TextBox _curPageName;          public static readonly string pathToXML = System.Environment.CurrentDirectory + "\\ListPages.xml";          System.Windows.Threading.DispatcherTimer timerPopup;          public PageEditorWindow()         {             InitializeComponent();             button_Activate.Click += (s, e) => Save_Click(s, e);              timerPopup = new System.Windows.Threading.DispatcherTimer();             timerPopup.Tick += ClosePopup;              UIControlList = new List<AbstrUIBase>();
 
-            elementsPageStackPanel.ContextMenuOpening += MouseRightButton_Click;             SetContextMenuWith(null);              UpdateListPage();         }
+            elementsPageStackPanel.ContextMenuOpening += MouseRightButton_Click;             SetContextMenuWith(null);              UpdateListPage();             CurPage = new APage();             _curPageName = CreatePageNameTextBox(CurPage);         }
 
         // Вывод интефейса для редактирования элементов 
         // страницы
         private void ListBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)         {             _curPageIndex = list_page_name.SelectedIndex != -1 ?                 list_page_name.SelectedIndex : _curPageIndex;             UpdateListPageEl();         }          public void SoftUpdate()         {
-            // Загружает информацию из сохранённого списка
+            // Загружает информацию о элементах на странице
+            // из сохранённого списка
             //
 
             if (CurPage != null)
-            {                 elementsPageStackPanel.Children.Clear();                  _curPageName = new TextBox();                 _curPageName.Text = CurPage.Name;                 _curPageName.Width = 256;                 _curPageName.TextAlignment = TextAlignment.Center;                  elementsPageStackPanel.Children.Add(_curPageName);                  for (int i = 0; i < UIControlList.Count; i++)                 {                     AbstrUIBase el = UIControlList[i];                     el.SetID(i);                     el.Container.Background =                         (i % 2 == 0) ? Brushes.WhiteSmoke : Brushes.LightGray;                      elementsPageStackPanel.Children.Add(UIControlList[i]);                     elementsPageStackPanel.Children.Add(                     UIGenerateHelping.NewSeparator(1, Brushes.Black));                 }             }         }         public void ClearListPageEl()
-        {              elementsPageStackPanel.Children.Clear();              System.GC.Collect();         }         public void UpdateListPageEl(UIBaseEl new_el = null)         {
-            // Загружает информацию напрямую из сохранённой страницы
+            {                 ClearListPageEl();                  _curPageName = CreatePageNameTextBox(CurPage);                  elementsPageStackPanel.Children.Add(_curPageName);                  for (int i = 0; i < UIControlList.Count; i++)                 {                     AbstrUIBase el = UIControlList[i];                     el.SetID(i);                     el.Container.Background =                         (i % 2 == 0) ? Brushes.WhiteSmoke : Brushes.LightGray;                      elementsPageStackPanel.Children.Add(UIControlList[i]);                     elementsPageStackPanel.Children.Add(                     UIGenerateHelping.NewSeparator(1, Brushes.Black));                 }             }         }         public void UpdateListPageEl(UIBaseEl new_el = null)         {
+            // Загружает информацию о элементах на странице
+            // напрямую из сохранённой страницы
             //
             ClearListPageEl(); 
             if (list_page_name.Items.Count <= _curPageIndex)
             {
                 return;
-            }              APage editPage = PageList[_curPageIndex];              if (new_el != null)                 editPage.Elements.Add(new_el.CompileElement());              UIControlList.Clear();             for (int i = 0; i < editPage.Elements.Count; i++)             {                 var el = editPage.Elements[i];                 CreateNewUIel(el);             }              CurPage = editPage;              SoftUpdate();         }
+            }              APage editPage = PageList[_curPageIndex];              if (new_el != null)                 editPage.Elements.Add(new_el.CompileElement());              UIControlList.Clear();             for (int i = 0; i < editPage.Elements.Count; i++)             {                 var el = editPage.Elements[i];                 CreateNewUIel(el);             }              CurPage = editPage;              SoftUpdate();         }         public void ClearListPageEl()
+        {
+            elementsPageStackPanel.Children.Clear();
+            System.GC.Collect();         }
 
         // Загрузить список страниц заново
         public void UpdateListPage()
         {
-            if (PageList != null) PageList.Clear();             PageList = Loader.LoadPageListFromXML(pathToXML);             list_page_name.ItemsSource = PageList;             System.GC.Collect();         }         private void CreateNewUIel(AbstrPageEl el)
+            if (PageList != null) PageList.Clear();              PageList = Loader.LoadPageListFromXML(pathToXML);             list_page_name.ItemsSource = PageList;              System.GC.Collect();         }         private void CreateNewUIel(AbstrPageEl el)
         {             AbstrUIBase UIel = PageElCenter.TryGenUiControl(el);             AddUItoList(UIel);         }
 
         private void CreateNewUIel(int ind)
-        {             AbstrUIBase UIel = PageElCenter.TryGenUiControl(ind);             AddUItoList(UIel);         }          private void AddUItoList(AbstrUIBase UIel)         {             if (UIel != null)             {                 UIel.DelClick += UIPageEl_DelClick;                 UIel.SetID(UIControlList.Count + 1);                 UIel.Drop += UIElementDropEvent;                 UIControlList.Add(UIel);             }         }          private void Swap(int u1, int u2)
+        {             AbstrUIBase UIel = PageElCenter.TryGenUiControl(ind);             AddUItoList(UIel);         }          private void AddUItoList(AbstrUIBase UIel)         {             if (UIel != null)             {                 UIel.DelClick += UIPageEl_DelClick;                 UIel.SetID(UIControlList.Count + 1);                 UIel.Drop += UIElementDropEvent;                 UIControlList.Add(UIel);             }         }         private TextBox CreatePageNameTextBox(APage page)          {
+            TextBox tmp_TB =  new TextBox();
+            tmp_TB .Text = page.Name;
+            tmp_TB .Width = 256;
+            tmp_TB.TextAlignment = TextAlignment.Center;              return tmp_TB;         }          private void Swap(int u1, int u2)
         {             AbstrUIBase u_tmp = UIControlList[u1];             UIControlList[u1] = UIControlList[u2];             UIControlList[u2] = u_tmp;             SoftUpdate();         }         private void SavePageList()         {             Writer.WritePageListToXML(PageList, pathToXML);         }
 
 
