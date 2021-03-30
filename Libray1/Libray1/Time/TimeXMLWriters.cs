@@ -75,12 +75,22 @@ namespace Lib.Time
 
             ndDt.Attributes.Append(attrSec);
 
+            // CustomName
+            var ndCustNm = xdd.CreateElement(
+                XMLDefines.XMLBaseElTag.CustomName.ToString());
+
+            var attrCustNm = xdd.CreateAttribute(
+                XMLDefines.XMLBaseElAttr.Data.ToString());
+
+            attrCustNm.Value = pt.CustomName;
+            ndCustNm.Attributes.Append(attrCustNm);
 
             //
             ndPageEl.AppendChild(ndPos);
             ndPageEl.AppendChild(ndClr);
             ndPageEl.AppendChild(ndSz);
             ndPageEl.AppendChild(ndDt);
+            ndPageEl.AppendChild(ndCustNm);
 
             return ndPageEl;
         }

@@ -15,7 +15,7 @@ namespace Lib.Time
         static public AbstrPageEl ReadXMLPageTime(XmlNode nd_el)
         {
             PageEl out_pageEl = new PageEl();
-            string pos_x = "0", pos_y = "0",
+            string pos_x = "0", pos_y = "0", customName="",
                    clr_hex = "0x", sz = "0", dt_str = "";
 
             try
@@ -47,6 +47,11 @@ namespace Lib.Time
                             dt_str = nd_string_par.Attributes.GetNamedItem(
                                 XMLDefines.XMLBaseElAttr.Data).Value;
                             break;
+
+                        case (XMLDefines.XMLBaseElTag.CustomName):
+                            customName = nd_string_par.Attributes.GetNamedItem(
+                                XMLDefines.XMLBaseElAttr.Data).Value;
+                            break;
                     }
                 }
             }
@@ -69,6 +74,8 @@ namespace Lib.Time
                 ((PageTime)out_pageEl).Second = (dt_str[0] == '1');
                 ((PageTime)out_pageEl).Minute = (dt_str[1] == '1');
                 ((PageTime)out_pageEl).Hour = (dt_str[2] == '1');
+
+                out_pageEl.CustomName = customName;
             }
             catch (Exception e)
             {

@@ -19,7 +19,7 @@ namespace BaseLib
 
         public readonly string NamePageEl;
 
-        public Panel Container { get; protected set; }
+        public Panel ExpandContainer { get; protected set; }
 
         public int ID { get; protected set; }
         public abstract void SetID(int id);

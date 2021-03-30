@@ -9,6 +9,7 @@ namespace BaseLib
     {
         public static readonly byte ID;
         public const string Name = "AbstrPageEl";
+        public string CustomName;
         public abstract List<byte> GenSendData();
         public abstract byte GetTypeEl();
         public abstract string GetNameEl();

@@ -17,13 +17,16 @@ namespace Lib.Time
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            Content = Container;
+            Content = ExpandContainer;
         }
         public UIPageTime(AbstrPageEl pEl)
             : base(47, pEl)
         {
             PageTime pt = (PageTime)pEl;
             SetID(PageTime.ID);
+
+            customNamePageEl = pt.CustomName;
+            textBoxCustomNamePageEl.Text = customNamePageEl;
 
             // Интерфейс для настройки позиции
             Label lbl_pos = new Label();
@@ -91,30 +94,30 @@ namespace Lib.Time
 
             //
 
-            labl_ID.Content = ID.ToString();
+            buttonExpand.Content = ID.ToString();
             //
             
-            Container.Children.Add(lbl_pos);
-            Container.Children.Add(tbX);
-            Container.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, Container.Background));
-            Container.Children.Add(tbY);
+            ExpandContainer.Children.Add(lbl_pos);
+            ExpandContainer.Children.Add(tbX);
+            ExpandContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
+            ExpandContainer.Children.Add(tbY);
 
-            Container.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, Container.Background));
+            ExpandContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
 
-            Container.Children.Add(clrBox);
+            ExpandContainer.Children.Add(clrBox);
 
-            Container.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, Container.Background));
+            ExpandContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
 
-            Container.Children.Add(lbl_size);
-            Container.Children.Add(tbS);
+            ExpandContainer.Children.Add(lbl_size);
+            ExpandContainer.Children.Add(tbS);
 
-            Container.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, Container.Background));
+            ExpandContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
 
-            Container.Children.Add(spFlasgs);
+            ExpandContainer.Children.Add(spFlasgs);
 
             clrBox.Uid = "clrBox";
             tbX.Uid = "tbX";
@@ -135,10 +138,10 @@ namespace Lib.Time
             int px = 0;
             int py = 0;
             int sz = 0;
-            
+            string customName = "None";
 
 
-            foreach (UIElement ch in Container.Children) 
+            foreach (UIElement ch in ExpandContainer.Children) 
             {
                 switch (ch.Uid) 
                 {
@@ -174,10 +177,13 @@ namespace Lib.Time
                         catch
                         { }
                         break;
-                    case "lblID":
+                    case pageElIndex:
                         if (!int.TryParse(
-                            ((ch as Label).Content as string), out id))
+                            ((ch as ContentControl).Content as string), out id))
                         { id = 0; }
+                        break;
+                    case pageElName:
+                        customName = (ch as TextBox).Text;
                         break;
                 }
             }
@@ -190,6 +196,7 @@ namespace Lib.Time
             ((PageTime)p_out).Second = sec;
             ((PageTime)p_out).Minute = min;
             ((PageTime)p_out).Hour = hour;
+            p_out.CustomName = customName;
 
             return p_out;
         }
