@@ -46,6 +46,7 @@ namespace Lib.Time
             SetPos(x, y);
             TextColor = clr;
             Size = sz;
+            CustomName = Name;
         }
 
         public override List<byte> GenSendData()

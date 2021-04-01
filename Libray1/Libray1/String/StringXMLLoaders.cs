@@ -15,7 +15,7 @@ namespace Lib.String
         static public AbstrPageEl ReadXMLPageString(XmlNode nd_el)
         {
             PageEl out_pageEl = new PageEl();
-            string pos_x = "0", pos_y = "0",
+            string pos_x = "0", pos_y = "0", customName = "",
                    clr_hex = "0x", sz = "0", dt_str = "";
 
             foreach (XmlNode nd_string_par in nd_el)
@@ -44,6 +44,11 @@ namespace Lib.String
                         dt_str = nd_string_par.Attributes.GetNamedItem(
                             XMLDefines.XMLBaseElAttr.Data).Value;
                         break;
+
+                    case (XMLDefines.XMLBaseElTag.CustomName):
+                        customName = nd_string_par.Attributes.GetNamedItem(
+                            XMLDefines.XMLBaseElAttr.Data).Value;
+                        break;
                 }
             }
 
@@ -57,7 +62,10 @@ namespace Lib.String
                 b_sz = Convert.ToByte(sz);
 
                 color = new AColor(clr_hex);
+                
+
                 out_pageEl = new PageString(b_pos_x, b_pos_y, color, b_sz, dt_str);
+                out_pageEl.CustomName = customName;
             }
             catch
             {}

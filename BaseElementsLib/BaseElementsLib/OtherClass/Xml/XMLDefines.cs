@@ -23,6 +23,7 @@ namespace BaseLib.Xml
         public class XMLBaseElTag 
         {
             public const string Position = "Position";
+            public const string CustomName = "CustName";
             public const string Color = "Color";
             public const string Size = "Size";
             public const string Data = "Data";

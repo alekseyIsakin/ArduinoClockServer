@@ -31,6 +31,7 @@ namespace Lib.String
             this.TextColor = clr;
             this.Size = sz;
             this.Data = str;
+            CustomName = Name;
         }
 
         public List<byte> GetByteColor()
