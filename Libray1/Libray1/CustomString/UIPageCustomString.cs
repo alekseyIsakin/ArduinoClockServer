@@ -73,7 +73,7 @@ namespace Lib.CustString
             //
 
             //
-            buttonExpand.Content = ID.ToString();
+            _buttonExpand.Content = ID.ToString();
             //
 
             ExpandContainer.Children.Add(tbT);

@@ -11,43 +11,43 @@ namespace BaseLib.HelpingClass
 {
     public class UIBaseEl : AbstrUIBase
     {
-        protected Button buttonExpand;
-        protected TextBox textBoxCustomNamePageEl;
-        protected int customNamePageElWidth = 512;
+        protected Button _buttonExpand;
+        protected TextBox _textBoxCustomNamePageEl;
+        protected const int _customNamePageElWidth = 512;
 
-        protected bool isExpand;
-        protected int fullHeight;
-        protected int minHeight;
+        protected bool _isExpand;
+        protected int _fullHeight;
+        protected int _minHeight;
 
-        protected string customNamePageEl;
+        protected string _customNamePageEl;
 
         protected const string pageElName  = "PageElStr";
         protected const string pageElIndex = "PageElID";
 
         public UIBaseEl(int Height, AbstrPageEl Pel) : base (Pel.GetNameEl())
         {
-            fullHeight = Height;
-            minHeight = 25;
-            isExpand = true;
+            _fullHeight = Height;
+            _minHeight = 25;
+            _isExpand = true;
 
-            buttonExpand = new Button();
-            buttonExpand.Uid = pageElIndex;
-            buttonExpand.Width = 20;
-            buttonExpand.Click += Expand;
+            _buttonExpand = new Button();
+            _buttonExpand.Uid = pageElIndex;
+            _buttonExpand.Width = 20;
+            _buttonExpand.Click += ExpandButtonClick;
 
-            textBoxCustomNamePageEl = new TextBox();
-            textBoxCustomNamePageEl.Uid = pageElName;
-            textBoxCustomNamePageEl.Width = 0;
-            textBoxCustomNamePageEl.Visibility = Visibility.Hidden;
-            textBoxCustomNamePageEl.Text = customNamePageEl;
+            _textBoxCustomNamePageEl = new TextBox();
+            _textBoxCustomNamePageEl.Uid = pageElName;
+            _textBoxCustomNamePageEl.Width = 0;
+            _textBoxCustomNamePageEl.Visibility = Visibility.Hidden;
+            _textBoxCustomNamePageEl.Text = _customNamePageEl;
 
             ExpandContainer = new DockPanel();
             ((DockPanel)ExpandContainer).LastChildFill = false;
-            ExpandContainer.Height = fullHeight;
+            ExpandContainer.Height = _fullHeight;
             ExpandContainer.AllowDrop = true;
 
-            ExpandContainer.Children.Add(buttonExpand);
-            ExpandContainer.Children.Add(textBoxCustomNamePageEl);
+            ExpandContainer.Children.Add(_buttonExpand);
+            ExpandContainer.Children.Add(_textBoxCustomNamePageEl);
             ExpandContainer.Children.Add(
                 UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
 
@@ -67,26 +67,43 @@ namespace BaseLib.HelpingClass
 
         public override void SetID(int id) 
         {
-            buttonExpand.Content = id.ToString();
+            _buttonExpand.Content = id.ToString();
             ID = id;
         }
 
-        private void Expand(object sender, EventArgs eventArgs) 
+        public void Expand(bool expand)
         {
-
-            if (isExpand)
+            if (!expand)
             {
                 _hidePageElSetting();
-                textBoxCustomNamePageEl.Width = customNamePageElWidth;
+                _textBoxCustomNamePageEl.Width = _customNamePageElWidth;
             }
             else
             {
                 _showPageElSetting();
-                textBoxCustomNamePageEl.Width = 0;
+                _textBoxCustomNamePageEl.Width = 0;
             }
 
-            isExpand = !isExpand;
-            ExpandContainer.Height = isExpand ? fullHeight : minHeight;
+            _isExpand = expand;
+            ExpandContainer.Height = _isExpand ? _fullHeight : _minHeight;
+
+        } 
+        private void ExpandButtonClick(object sender, EventArgs eventArgs) 
+        {
+
+            if (_isExpand)
+            {
+                _hidePageElSetting();
+                _textBoxCustomNamePageEl.Width = _customNamePageElWidth;
+            }
+            else
+            {
+                _showPageElSetting();
+                _textBoxCustomNamePageEl.Width = 0;
+            }
+
+            _isExpand = !_isExpand;
+            ExpandContainer.Height = _isExpand ? _fullHeight : _minHeight;
         }
 
         private void _hidePageElSetting() 

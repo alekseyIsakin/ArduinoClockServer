@@ -25,8 +25,8 @@ namespace Lib.Time
             PageTime pt = (PageTime)pEl;
             SetID(PageTime.ID);
 
-            customNamePageEl = pt.CustomName;
-            textBoxCustomNamePageEl.Text = customNamePageEl;
+            _customNamePageEl = pt.CustomName;
+            _textBoxCustomNamePageEl.Text = _customNamePageEl;
 
             // Интерфейс для настройки позиции
             Label lbl_pos = new Label();
@@ -94,7 +94,7 @@ namespace Lib.Time
 
             //
 
-            buttonExpand.Content = ID.ToString();
+            _buttonExpand.Content = ID.ToString();
             //
             
             ExpandContainer.Children.Add(lbl_pos);

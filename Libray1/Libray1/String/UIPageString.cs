@@ -25,8 +25,8 @@ namespace Lib.String
             PageString ps = (PageString)pEl;
             SetID (PageString.ID);
 
-            customNamePageEl = ps.CustomName;
-            textBoxCustomNamePageEl.Text = customNamePageEl;
+            _customNamePageEl = ps.CustomName;
+            _textBoxCustomNamePageEl.Text = _customNamePageEl;
 
             // Интерфейс для настройки позиции
             Label lbl_pos = new Label();
@@ -76,7 +76,7 @@ namespace Lib.String
             //
 
             //
-            buttonExpand.Content = ID.ToString();
+            _buttonExpand.Content = ID.ToString();
             //
 
             ExpandContainer.Children.Add(tbT);
