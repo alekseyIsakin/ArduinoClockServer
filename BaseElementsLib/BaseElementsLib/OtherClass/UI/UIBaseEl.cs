@@ -54,13 +54,14 @@ namespace BaseLib.HelpingClass
             PageContainer.MouseLeftButtonDown += container_MouseDown;
             PageContainer.Drop += (s, e) => RaiseDrop(this, e.Data.GetData(typeof(AbstrUIBase)));
         }
-
+        #region Events
         private void container_MouseDown(object sender, EventArgs e)
         {
             DataObject data = new DataObject(typeof(AbstrUIBase), this);
             DragDrop.DoDragDrop(PageContainer, data, DragDropEffects.Move);
         }
-
+        #endregion
+        #region Generic Functions
         public override AbstrPageEl CompileElement() {
             return null; 
         }
@@ -70,7 +71,8 @@ namespace BaseLib.HelpingClass
             _buttonExpand.Content = id.ToString();
             ID = id;
         }
-
+        #endregion
+        #region Expand
         public void SetExpand(bool expand)
         {
             if (!expand)
@@ -114,5 +116,6 @@ namespace BaseLib.HelpingClass
                 child.Visibility = Visibility.Visible;
             }
         }
+        #endregion
     }
 }

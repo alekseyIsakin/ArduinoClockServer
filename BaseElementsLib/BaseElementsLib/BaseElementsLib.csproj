@@ -53,6 +53,7 @@
     <Compile Include="OtherClass\UI\UIAcolorBox.cs" />
     <Compile Include="OtherClass\UI\UIBaseEl.cs" />
     <Compile Include="OtherClass\UI\UIGenerateHelping.cs" />
+    <Compile Include="OtherClass\Xml\XMLDateTimeChecker.cs" />
     <Compile Include="OtherClass\Xml\XMLDefines.cs" />
     <Compile Include="PageClear.cs" />
     <Compile Include="PageEl.cs" />
