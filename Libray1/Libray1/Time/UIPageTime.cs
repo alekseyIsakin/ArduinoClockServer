@@ -17,7 +17,7 @@ namespace Lib.Time
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            Content = ExpandContainer;
+            Content = PageContainer;
         }
         public UIPageTime(AbstrPageEl pEl)
             : base(47, pEl)
@@ -97,27 +97,27 @@ namespace Lib.Time
             _buttonExpand.Content = ID.ToString();
             //
             
-            ExpandContainer.Children.Add(lbl_pos);
-            ExpandContainer.Children.Add(tbX);
-            ExpandContainer.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
-            ExpandContainer.Children.Add(tbY);
+            PageContainer.Children.Add(lbl_pos);
+            PageContainer.Children.Add(tbX);
+            PageContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, PageContainer.Background));
+            PageContainer.Children.Add(tbY);
 
-            ExpandContainer.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
+            PageContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, PageContainer.Background));
 
-            ExpandContainer.Children.Add(clrBox);
+            PageContainer.Children.Add(clrBox);
 
-            ExpandContainer.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
+            PageContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, PageContainer.Background));
 
-            ExpandContainer.Children.Add(lbl_size);
-            ExpandContainer.Children.Add(tbS);
+            PageContainer.Children.Add(lbl_size);
+            PageContainer.Children.Add(tbS);
 
-            ExpandContainer.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
+            PageContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, PageContainer.Background));
 
-            ExpandContainer.Children.Add(spFlasgs);
+            PageContainer.Children.Add(spFlasgs);
 
             clrBox.Uid = "clrBox";
             tbX.Uid = "tbX";
@@ -141,7 +141,7 @@ namespace Lib.Time
             string customName = "None";
 
 
-            foreach (UIElement ch in ExpandContainer.Children) 
+            foreach (UIElement ch in PageContainer.Children) 
             {
                 switch (ch.Uid) 
                 {

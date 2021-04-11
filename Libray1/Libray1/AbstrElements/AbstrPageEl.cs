@@ -5,11 +5,17 @@ using System.Text;
 
 namespace BaseLib
 {
+    [System.Xml.Serialization.XmlInclude(typeof(Lib.Time.PageTime))]
+    [System.Xml.Serialization.XmlInclude(typeof(Lib.String.PageString))]
     public abstract class AbstrPageEl
     {
         public static readonly byte ID;
         public const string Name = "AbstrPageEl";
-        public string CustomName;
+        
+        #region Serialize
+        [System.Xml.Serialization.XmlAttribute]
+        public string CustomName; 
+        #endregion
         public abstract List<byte> GenSendData();
         public abstract byte GetTypeEl();
         public abstract string GetNameEl();

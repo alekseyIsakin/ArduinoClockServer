@@ -24,15 +24,11 @@ namespace Lib
 
             ExternalLib stringDt = new ExternalLib(PageString.ID, PageString.Name,
                 () => new PageString(),
-                (pl) => new UIPageString(pl),
-                StringXmlBehavior.ReadXMLPageString,
-                StringXmlBehavior.WritePageStringToXml);
+                (pl) => new UIPageString(pl));
 
             ExternalLib timeDt = new ExternalLib(PageTime.ID, PageTime.Name,
                 () => new PageTime(),
-                (pl) => new UIPageTime(pl),
-                TimeXmlBehavior.ReadXMLPageTime,
-                TimeXmlBehavior.WritePageTimeToXml);
+                (pl) => new UIPageTime(pl));
 
             externalLibs.Add(stringDt);
             externalLibs.Add(timeDt);

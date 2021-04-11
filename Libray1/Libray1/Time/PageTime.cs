@@ -18,24 +18,27 @@ namespace Lib.Time
         public override string GetNameEl()
         { return Name; }
 
+        private byte _size;
+
+        #region Serialize
         const byte MaxSize = 15;
 
         public bool Hour = true;
-        public bool Minute= true;
-        public bool Second= false;
+        public bool Minute = true;
+        public bool Second = false;
 
         public AColor TextColor;
-        private byte _size;
-        public byte Size 
+        public byte Size
         {
             get
             { return _size; }
-            set 
+            set
             {
                 if (value > MaxSize) _size = MaxSize;
                 else _size = value;
             }
-        }
+        } 
+        #endregion
 
         public byte[] TimeSetting = new byte[2];
 

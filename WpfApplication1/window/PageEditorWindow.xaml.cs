@@ -1,4 +1,4 @@
-﻿using System; using System.Collections.Generic; using System.Linq; using System.Text; using System.Windows; using System.Windows.Controls; using System.Windows.Data; using System.Windows.Documents; using System.Windows.Input; using System.Windows.Media; using System.Windows.Media.Imaging; using System.Windows.Shapes; using System.Xml;  using ArdClock.ArdPage; using ArdClock.ArdPage;  using BaseLib; using BaseLib.HelpingClass;  namespace ArdClock.window {
+﻿using System; using System.Collections.Generic; using System.Linq; using System.Text; using System.Windows; using System.Windows.Controls; using System.Windows.Data; using System.Windows.Documents; using System.Windows.Input; using System.Windows.Media; using System.Windows.Media.Imaging; using System.Windows.Shapes; using System.Xml;  using ArdClock.ArdPage;  using BaseLib; using BaseLib.HelpingClass;  namespace ArdClock.window {
     /// <summary>     /// Логика взаимодействия для Window1.xaml     /// </summary>     ///  
 
     public partial class PageEditorWindow : Window     {
@@ -18,7 +18,7 @@
             //
 
             if (CurPage != null)
-            {                 ClearListPageEl();                  _curPageName = CreatePageNameTextBox(CurPage);                  elementsPageStackPanel.Children.Add(_curPageName);                  for (int i = 0; i < ListUIControls.Count; i++)                 {                     AbstrUIBase el = ListUIControls[i];                     el.SetID(i);                     el.ExpandContainer.Background =                         (i % 2 == 0) ? Brushes.WhiteSmoke : Brushes.LightGray;                      elementsPageStackPanel.Children.Add(ListUIControls[i]);                     elementsPageStackPanel.Children.Add(                     UIGenerateHelping.NewSeparator(1, Brushes.Black));                 }             }         }         public void UpdateListPageEl(UIBaseEl new_el = null)         {
+            {                 ClearListPageEl();                  _curPageName = CreatePageNameTextBox(CurPage);                  elementsPageStackPanel.Children.Add(_curPageName);                  for (int i = 0; i < ListUIControls.Count; i++)                 {                     AbstrUIBase el = ListUIControls[i];                     el.SetID(i);                     el.PageContainer.Background =                         (i % 2 == 0) ? Brushes.WhiteSmoke : Brushes.LightGray;                      elementsPageStackPanel.Children.Add(ListUIControls[i]);                     elementsPageStackPanel.Children.Add(                     UIGenerateHelping.NewSeparator(1, Brushes.Black));                 }             }         }         public void UpdateListPageEl(UIBaseEl new_el = null)         {
             // Загружает информацию о элементах на странице
             // напрямую из сохранённой страницы
             //
@@ -31,7 +31,7 @@
             elementsPageStackPanel.Children.Clear();
             System.GC.Collect();         }         public void ExpandListPageEl(bool expand)
         {
-            ListUIControls.ForEach((e) => (e as UIBaseEl).Expand(expand));
+            ListUIControls.ForEach((e) => (e as UIBaseEl).SetExpand(expand));
         }
 
         // Загрузить список страниц заново

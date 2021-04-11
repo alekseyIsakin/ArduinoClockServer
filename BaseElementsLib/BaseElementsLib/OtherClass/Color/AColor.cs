@@ -8,12 +8,14 @@ namespace BaseLib.HelpingClass
 {
     public class AColor
     {
-        public byte block1 { get; private set; }
+        #region Serialize
+        public byte block1;
         // #### ####
         // ^^^^
-        public byte block2 { get; private set; }
+        public byte block2;
         // #### ####
         //      ^^^^
+        #endregion 
         public AColor() 
         { SetFromInt(0x0000); }
 
