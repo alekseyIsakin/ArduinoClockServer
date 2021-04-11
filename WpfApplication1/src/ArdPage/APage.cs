@@ -20,17 +20,17 @@ namespace ArdClock.ArdPage
 
     public class APage
     {
-        public string Name { get; private set; }
-        public int ID      { get; private set; }
-
+        [System.Xml.Serialization.XmlAttribute]
+        public string Name;
+        [System.Xml.Serialization.XmlAttribute]
+        public int ID;
         public List<AbstrPageEl> Elements { get; private set; }
 
         public APage(string name, int id, List<AbstrPageEl> elements) 
         {
             Name = name;
-            ID   = id;
+            ID = id;
             Elements = elements;
-            
         }
 
         public APage() :

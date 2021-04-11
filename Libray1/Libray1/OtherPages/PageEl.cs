@@ -7,8 +7,11 @@ namespace BaseLib
 {
     public class PageEl : AbstrPageEl
     {
-        public byte X { get; private set; }
-        public byte Y { get; private set; }
+        #region Serialize
+        public byte X;
+        public byte Y; 
+        #endregion
+
         public override byte GetTypeEl()
         { return ID; }
         public override string GetNameEl()
@@ -33,8 +36,8 @@ namespace BaseLib
         public List<byte> GeSendtPos()
         {
             List<byte> lout = new List<byte>();
-            lout.Add((byte)(X));
-            lout.Add((byte)(Y));
+            lout.Add(X);
+            lout.Add(Y);
             return lout;
         }
 

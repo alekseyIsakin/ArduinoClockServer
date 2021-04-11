@@ -18,9 +18,11 @@ namespace Lib.String
         { return Name; }
 
 
+        #region Serialize
         public AColor TextColor;
         public byte Size;
-        public string Data;
+        public string Data; 
+        #endregion
 
         public PageString() : this(0, 0, AColors.WHITE, 5, "string")
         { }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Xml;
+using System.Xml.Serialization;
 
 using BaseLib.Xml;
 
@@ -14,7 +15,27 @@ namespace ArdClock.ArdPage
     {
         static public void WritePageListToXML(List<APage> pageList, string fileName)
         {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<APage>));
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(fileName);
+            try
+            {
+                serializer.Serialize(sw, pageList);
+                sw.Close();
+            }
+            catch 
+            { }
+        }
+        static public void OldWritePageListToXML(List<APage> pageList, string fileName)
+        {
+
             XmlDocument xdd = new XmlDocument();
+
+            System.IO.StreamWriter sw = new System.IO.StreamWriter("test.xml");
+            XmlSerializer serializer = new XmlSerializer(typeof(List<APage>));
+            sw.WriteLine("Hello World!!");
+            serializer.Serialize(sw, pageList);
+            sw.Close();
+
 
             var xmlDeclaration = xdd.CreateXmlDeclaration("1.0", "UTF-8", null);
             var root = xdd.CreateElement(
