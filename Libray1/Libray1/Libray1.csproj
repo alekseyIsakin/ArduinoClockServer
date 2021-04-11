@@ -55,16 +55,8 @@
     <Compile Include="String\PageString.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="String\StringXMLLoaders.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="String\StringXMLWriters.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="String\UIPageString.cs" />
     <Compile Include="Time\PageTime.cs" />
-    <Compile Include="Time\TimeXMLLoaders.cs" />
-    <Compile Include="Time\TimeXMLWriters.cs" />
     <Compile Include="Time\UIPageTime.cs" />
   </ItemGroup>
   <ItemGroup>

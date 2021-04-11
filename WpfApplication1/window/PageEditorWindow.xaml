@@ -17,7 +17,7 @@
             </ListBox.ContextMenu>
         </ListBox>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="193,0,0,0" BorderBrush="Black" BorderThickness="1">
-            <StackPanel Name="elementsPageStackPanel" Orientation="Vertical" Background="#FFF2F2F2" Height="216"/>
+            <StackPanel Name="elementsPageStackPanel" Orientation="Vertical" Background="#FFF2F2F2" Margin="0,12,0,0"/>
         </ScrollViewer>
 
         <Popup x:Name="popup1" StaysOpen="False" Placement="MousePoint" AllowsTransparency="True" MouseLeave="popup1_MouseLeave" MouseEnter="Popup1_MouseEnter" PopupAnimation="Slide" Visibility="Visible" Panel.ZIndex="-1">
