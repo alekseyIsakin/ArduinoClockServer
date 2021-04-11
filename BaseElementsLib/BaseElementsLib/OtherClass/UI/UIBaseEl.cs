@@ -41,24 +41,24 @@ namespace BaseLib.HelpingClass
             _textBoxCustomNamePageEl.Visibility = Visibility.Hidden;
             _textBoxCustomNamePageEl.Text = _customNamePageEl;
 
-            ExpandContainer = new DockPanel();
-            ((DockPanel)ExpandContainer).LastChildFill = false;
-            ExpandContainer.Height = _fullHeight;
-            ExpandContainer.AllowDrop = true;
+            PageContainer = new DockPanel();
+            ((DockPanel)PageContainer).LastChildFill = false;
+            PageContainer.Height = _fullHeight;
+            PageContainer.AllowDrop = true;
 
-            ExpandContainer.Children.Add(_buttonExpand);
-            ExpandContainer.Children.Add(_textBoxCustomNamePageEl);
-            ExpandContainer.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
+            PageContainer.Children.Add(_buttonExpand);
+            PageContainer.Children.Add(_textBoxCustomNamePageEl);
+            PageContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, PageContainer.Background));
 
-            ExpandContainer.MouseLeftButtonDown += container_MouseDown;
-            ExpandContainer.Drop += (s, e) => RaiseDrop(this, e.Data.GetData(typeof(AbstrUIBase)));
+            PageContainer.MouseLeftButtonDown += container_MouseDown;
+            PageContainer.Drop += (s, e) => RaiseDrop(this, e.Data.GetData(typeof(AbstrUIBase)));
         }
 
         private void container_MouseDown(object sender, EventArgs e)
         {
             DataObject data = new DataObject(typeof(AbstrUIBase), this);
-            DragDrop.DoDragDrop(ExpandContainer, data, DragDropEffects.Move);
+            DragDrop.DoDragDrop(PageContainer, data, DragDropEffects.Move);
         }
 
         public override AbstrPageEl CompileElement() {
@@ -71,7 +71,7 @@ namespace BaseLib.HelpingClass
             ID = id;
         }
 
-        public void Expand(bool expand)
+        public void SetExpand(bool expand)
         {
             if (!expand)
             {
@@ -83,32 +83,16 @@ namespace BaseLib.HelpingClass
                 _showPageElSetting();
                 _textBoxCustomNamePageEl.Width = 0;
             }
-
             _isExpand = expand;
-            ExpandContainer.Height = _isExpand ? _fullHeight : _minHeight;
+            PageContainer.Height = _isExpand ? _fullHeight : _minHeight;
 
         } 
         private void ExpandButtonClick(object sender, EventArgs eventArgs) 
-        {
-
-            if (_isExpand)
-            {
-                _hidePageElSetting();
-                _textBoxCustomNamePageEl.Width = _customNamePageElWidth;
-            }
-            else
-            {
-                _showPageElSetting();
-                _textBoxCustomNamePageEl.Width = 0;
-            }
-
-            _isExpand = !_isExpand;
-            ExpandContainer.Height = _isExpand ? _fullHeight : _minHeight;
-        }
+        { SetExpand(!_isExpand); }
 
         private void _hidePageElSetting() 
         {
-            foreach (UIElement child in ExpandContainer.Children)
+            foreach (UIElement child in PageContainer.Children)
             {
                 if (child.Uid == pageElIndex || child.Uid == pageElName) 
                 {
@@ -120,7 +104,7 @@ namespace BaseLib.HelpingClass
         }
         private void _showPageElSetting()
         {
-            foreach (UIElement child in ExpandContainer.Children)
+            foreach (UIElement child in PageContainer.Children)
             {
                 if (child.Uid == pageElName)
                 {

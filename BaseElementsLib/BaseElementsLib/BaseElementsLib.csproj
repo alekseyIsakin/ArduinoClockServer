@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstrPageEl.cs" />
+    <Compile Include="DateTimeChecker.cs" />
     <Compile Include="ExternalLib.cs" />
     <Compile Include="OtherClass\Color\AColor.cs" />
     <Compile Include="OtherClass\Color\AColors.cs" />

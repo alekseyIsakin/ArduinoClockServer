@@ -17,7 +17,7 @@ namespace Lib.String
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            Content = ExpandContainer;
+            Content = PageContainer;
         }
         public UIPageString(AbstrPageEl pEl)
             : base(60, pEl)
@@ -79,24 +79,24 @@ namespace Lib.String
             _buttonExpand.Content = ID.ToString();
             //
 
-            ExpandContainer.Children.Add(tbT);
+            PageContainer.Children.Add(tbT);
 
-            ExpandContainer.Children.Add(lbl_pos);
-            ExpandContainer.Children.Add(tbX);
-            ExpandContainer.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
-            ExpandContainer.Children.Add(tbY);
+            PageContainer.Children.Add(lbl_pos);
+            PageContainer.Children.Add(tbX);
+            PageContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, PageContainer.Background));
+            PageContainer.Children.Add(tbY);
 
-            ExpandContainer.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
+            PageContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, PageContainer.Background));
 
-            ExpandContainer.Children.Add(clrBox);
+            PageContainer.Children.Add(clrBox);
 
-            ExpandContainer.Children.Add(
-                UIGenerateHelping.NewGridSplitter(10, ExpandContainer.Background));
+            PageContainer.Children.Add(
+                UIGenerateHelping.NewGridSplitter(10, PageContainer.Background));
 
-            ExpandContainer.Children.Add(lbl_size);
-            ExpandContainer.Children.Add(tbS);
+            PageContainer.Children.Add(lbl_size);
+            PageContainer.Children.Add(tbS);
 
             clrBox.Uid = "clrBox";
             tbX.Uid = "tbX";
@@ -115,7 +115,7 @@ namespace Lib.String
             int sz = 0;
             string customName = "None";
 
-            foreach (UIElement ch in ExpandContainer.Children) 
+            foreach (UIElement ch in PageContainer.Children) 
             {
                 switch (ch.Uid) 
                 {

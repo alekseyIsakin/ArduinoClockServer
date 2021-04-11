@@ -18,7 +18,7 @@
             //
 
             if (CurPage != null)
-            {                 ClearListPageEl();                  _curPageName = CreatePageNameTextBox(CurPage);                  elementsPageStackPanel.Children.Add(_curPageName);                  for (int i = 0; i < ListUIControls.Count; i++)                 {                     AbstrUIBase el = ListUIControls[i];                     el.SetID(i);                     el.ExpandContainer.Background =                         (i % 2 == 0) ? Brushes.WhiteSmoke : Brushes.LightGray;                      elementsPageStackPanel.Children.Add(ListUIControls[i]);                     elementsPageStackPanel.Children.Add(                     UIGenerateHelping.NewSeparator(1, Brushes.Black));                 }             }         }         public void UpdateListPageEl(UIBaseEl new_el = null)         {
+            {                 ClearListPageEl();                  _curPageName = CreatePageNameTextBox(CurPage);                  elementsPageStackPanel.Children.Add(_curPageName);                  for (int i = 0; i < ListUIControls.Count; i++)                 {                     AbstrUIBase el = ListUIControls[i];                     el.SetID(i);                     el.PageContainer.Background =                         (i % 2 == 0) ? Brushes.WhiteSmoke : Brushes.LightGray;                      elementsPageStackPanel.Children.Add(ListUIControls[i]);                     elementsPageStackPanel.Children.Add(                     UIGenerateHelping.NewSeparator(1, Brushes.Black));                 }             }         }         public void UpdateListPageEl(UIBaseEl new_el = null)         {
             // Загружает информацию о элементах на странице
             // напрямую из сохранённой страницы
             //
@@ -31,7 +31,7 @@
             elementsPageStackPanel.Children.Clear();
             System.GC.Collect();         }         public void ExpandListPageEl(bool expand)
         {
-            ListUIControls.ForEach((e) => (e as UIBaseEl).Expand(expand));
+            ListUIControls.ForEach((e) => (e as UIBaseEl).SetExpand(expand));
         }
 
         // Загрузить список страниц заново
