@@ -17,13 +17,15 @@ namespace ArdClock.ArdPage
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<APage>));
 
-            using (var sw = new System.IO.StreamWriter(fileName))
+            try
             {
-                try
-                { serializer.Serialize(sw, pageList); }
-                catch (Exception e)
-                { MessageBox.Show("Не удалось сохранить файл настроек" + e.Message); }
+                using (var sw = new System.IO.StreamWriter(fileName))
+                {
+                    serializer.Serialize(sw, pageList);
+                }
             }
+            catch (Exception e)
+            { MessageBox.Show("Не удалось сохранить файл настроек" + e.Message); }
         }
     }
 }
