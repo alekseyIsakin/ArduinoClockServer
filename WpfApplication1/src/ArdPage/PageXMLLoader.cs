@@ -19,18 +19,18 @@ namespace ArdClock.ArdPage
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<APage>));
 
-            using (var sw = new System.IO.StreamReader(fileName))
+            try
             {
-                try
+                using (var sw = new System.IO.StreamReader(fileName))
                 {
                     pageList = (List<APage>)serializer.Deserialize(sw);
                 }
-                catch (System.IO.FileNotFoundException e)
-                {
-                    MessageBox.Show("В директории не неайден существующий файл с настройками, поэтому будет создан новый\n" + e.Source);
-                    pageList.Add(new APage());
-                    WritePageListToXML(pageList, fileName);
-                }
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+                MessageBox.Show("В директории не неайден существующий файл с настройками, поэтому будет создан новый\n" + e.Source);
+                pageList.Add(new APage());
+                WritePageListToXML(pageList, fileName);
             }
 
             return pageList;
