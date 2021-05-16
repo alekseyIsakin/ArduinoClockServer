@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO.Ports;
 
-using BaseLib;
+using Lib;
 
 namespace ArdClock.SerialControl
 {
@@ -14,10 +14,11 @@ namespace ArdClock.SerialControl
         public event EventHandler SuccSend;
 
         const int TIME_WAIT = 2; // время на обработку отправки
-        
+        const int MAX_MSG_LEN = 64; // максимальное количество отправяемых символов
+
         System.Windows.Threading.DispatcherTimer timer;
 
-        bool ReadyToSend = false;
+        public bool ReadyToSend { get; private set; } = false;
 
         public int BaudRate{ get; private set; }
         public string PortName{ get; private set; }
@@ -54,7 +55,7 @@ namespace ArdClock.SerialControl
         public void SetBaudRate(int BaudRate) { SPort.BaudRate = BaudRate; }
 
         public void Connect() { SPort.Open(); }
-        public void Disconnect() { SPort.Close(); }
+        public void Disconnect() { SPort.Close(); ReadyToSend = false; }
 
         public void Send(ArdPage.APage page)
         {
@@ -75,6 +76,7 @@ namespace ArdClock.SerialControl
             if (ReadyToSend)
                 try
                 {
+                    // Добавить предупреждение о переполнении
                     SPort.Write(byteArr.ToArray(), 0, byteArr.Count);
                     ReadyToSend = false;
 

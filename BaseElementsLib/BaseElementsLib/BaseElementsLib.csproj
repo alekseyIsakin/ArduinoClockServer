@@ -45,11 +45,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OtherClass\Color\AColor.cs" />
-    <Compile Include="OtherClass\Color\AColors.cs" />
-    <Compile Include="OtherClass\UI\UIAcolorBox.cs" />
-    <Compile Include="OtherClass\UI\UIGenerateHelping.cs" />
-    <Compile Include="OtherClass\Xml\XMLDefines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

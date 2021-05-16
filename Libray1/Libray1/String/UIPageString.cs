@@ -7,8 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-using BaseLib;
-using BaseLib.HelpingClass;
+using Lib;
+using Lib.HelpingClass;
 
 namespace Lib.String
 {

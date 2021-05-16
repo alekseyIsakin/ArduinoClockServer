@@ -49,6 +49,10 @@
     <Compile Include="AbstrElements\UIBaseEl.cs" />
     <Compile Include="ExternalBaseLib.cs" />
     <Compile Include="ExternalLib.cs" />
+    <Compile Include="OtherClass\Color\AColor.cs" />
+    <Compile Include="OtherClass\Color\AColors.cs" />
+    <Compile Include="OtherClass\UI\UIAcolorBox.cs" />
+    <Compile Include="OtherClass\UI\UIGenerateHelping.cs" />
     <Compile Include="OtherPages\PageClear.cs" />
     <Compile Include="OtherPages\PageEl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,12 +62,6 @@
     <Compile Include="String\UIPageString.cs" />
     <Compile Include="Time\PageTime.cs" />
     <Compile Include="Time\UIPageTime.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\BaseElementsLib\BaseElementsLib\BaseElementsLib.csproj">
-      <Project>{630b22f5-3f3e-4faa-bb07-b1abc619369d}</Project>
-      <Name>BaseElementsLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

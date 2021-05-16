@@ -5,9 +5,9 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-using BaseLib;
+using Lib;
 
-namespace BaseLib.HelpingClass
+namespace Lib.HelpingClass
 {
     public class UIBaseEl : AbstrUIBase
     {

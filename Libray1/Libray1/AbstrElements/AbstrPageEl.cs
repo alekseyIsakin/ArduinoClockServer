@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BaseLib
+namespace Lib
 {
     [System.Xml.Serialization.XmlInclude(typeof(Lib.Time.PageTime))]
     [System.Xml.Serialization.XmlInclude(typeof(Lib.String.PageString))]

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BaseLib
+namespace Lib
 {
     public class DragDropArgs : EventArgs
     {

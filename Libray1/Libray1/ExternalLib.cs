@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BaseLib
+namespace Lib
 {
     public delegate AbstrPageEl BaseConstruct();
     public delegate AbstrUIBase BaseUIConstruct(AbstrPageEl abstrUIBase);

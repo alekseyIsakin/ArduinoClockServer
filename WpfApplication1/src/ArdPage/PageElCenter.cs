@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using BaseLib;
+using Lib;
 
 namespace ArdClock.ArdPage
 {
@@ -12,7 +12,7 @@ namespace ArdClock.ArdPage
         private static readonly Dictionary<int, BaseConstruct> _funcsConstruct = new Dictionary<int, BaseConstruct>();
         private static readonly Dictionary<int, BaseUIConstruct> _funcsUIConstruct = new Dictionary<int, BaseUIConstruct>();
 
-        static private readonly List<int> _index = new List<int>();
+        static private readonly HashSet<int> _index = new HashSet<int>();
         static private readonly Dictionary<int, string> _namesPageEl = new Dictionary<int,string>();
 
         static PageElCenter()
@@ -46,13 +46,10 @@ namespace ArdClock.ArdPage
 
         public static bool HasID(int id)
         {
-            foreach (var i in _index)
-                if (i == id)
-                    return true;
-            return false;
+            return _index.Contains(id);
         }
 
-        public static Dictionary<int,string> GetDict()
+        public static Dictionary<int,string> GetDictNames()
         { return _namesPageEl; }
 
         public static void AddNewElement(ExternalLib externalLib)

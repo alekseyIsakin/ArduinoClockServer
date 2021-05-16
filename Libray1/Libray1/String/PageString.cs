@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using BaseLib;
-using BaseLib.HelpingClass;
+using Lib;
+using Lib.HelpingClass;
 
 namespace Lib.String
 {

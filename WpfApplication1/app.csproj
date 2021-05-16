@@ -27,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>0.3.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -200,10 +200,6 @@
     <None Include="ico\OK_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaseElementsLib\BaseElementsLib\BaseElementsLib.csproj">
-      <Project>{630b22f5-3f3e-4faa-bb07-b1abc619369d}</Project>
-      <Name>BaseElementsLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Libray1\Libray1\Libray1.csproj">
       <Project>{0ccab0a7-899c-414a-a3f2-e6a14d17a0a6}</Project>
       <Name>Libray1</Name>

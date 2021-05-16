@@ -6,8 +6,6 @@ using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
-using BaseLib.Xml;
-
 
 namespace ArdClock.ArdPage
 {

@@ -7,8 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-using Lib;
-
 namespace Lib.HelpingClass
 {
     public class UIAcolorBox : UserControl

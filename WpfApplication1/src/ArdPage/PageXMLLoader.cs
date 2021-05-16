@@ -6,9 +6,6 @@ using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
-using BaseLib;
-using BaseLib.Xml;
-
 namespace ArdClock.ArdPage
 {
     public static partial class PageElCenter

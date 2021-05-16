@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="Window1" Height="300" Width="737" DataContext="{Binding}"
+        Title="Settings" Height="300" Width="737" DataContext="{Binding}"
         Closing="Window_Closing" ResizeMode="NoResize">
     <Grid>
         <ListBox HorizontalAlignment="Left" Margin="12,12,0,41" Name="list_page_name" Width="175" SelectionChanged="ListBox1_SelectionChanged" >
