@@ -9,7 +9,7 @@ namespace Lib
     [System.Xml.Serialization.XmlInclude(typeof(Lib.String.PageString))]
     public abstract class AbstrPageEl
     {
-        public static readonly byte ID;
+        public const byte   ID = 0;
         public const string Name = "AbstrPageEl";
         
         #region Serialize

@@ -14,11 +14,14 @@ namespace Lib.Time
 {
     class UIPageTime : UIBaseEl
     {
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-            Content = PageContainer;
-        }
+        private readonly TextBox tbX;
+        private readonly TextBox tbY;
+        private readonly UIAcolorBox clrBox;
+        private readonly CheckBox cbSecond;
+        private readonly CheckBox cbMinut;
+        private readonly CheckBox cbHour;
+        private readonly TextBox tbS;
+
         public UIPageTime(AbstrPageEl pEl)
             : base(47, pEl)
         {
@@ -30,8 +33,8 @@ namespace Lib.Time
 
             // Интерфейс для настройки позиции
             Label lbl_pos = new Label();
-            TextBox tbX = new TextBox();
-            TextBox tbY = new TextBox();
+            tbX = new TextBox();
+            tbY = new TextBox();
 
             lbl_pos.Content = "Позиция";
             lbl_pos.VerticalAlignment = VerticalAlignment.Center;
@@ -55,13 +58,13 @@ namespace Lib.Time
 
             // Цвет
 
-            UIAcolorBox clrBox = new UIAcolorBox(
+            clrBox = new UIAcolorBox(
                 pt.TextColor.GetColor());
             //
 
             // Размер
             Label lbl_size = new Label();
-            TextBox tbS = new TextBox();
+            tbS = new TextBox();
 
             lbl_size.Content = "Размер";
             lbl_size.VerticalAlignment = VerticalAlignment.Center;
@@ -75,9 +78,9 @@ namespace Lib.Time
             // Флаги
             StackPanel spFlasgs = new StackPanel();
 
-            CheckBox cbSecond = new CheckBox();
-            CheckBox cbMinut = new CheckBox();
-            CheckBox cbHour = new CheckBox();
+            cbSecond = new CheckBox();
+            cbMinut = new CheckBox();
+            cbHour = new CheckBox();
 
             cbSecond.IsChecked = pt.Second;
             cbMinut.IsChecked = pt.Minute;
@@ -118,80 +121,24 @@ namespace Lib.Time
                 UIGenerateHelping.NewGridSplitter(10, PageContainer.Background));
 
             PageContainer.Children.Add(spFlasgs);
-
-            clrBox.Uid = "clrBox";
-            tbX.Uid = "tbX";
-            tbY.Uid = "tbY";
-            tbS.Uid = "tbS";
-            spFlasgs.Uid = "spF";
-            cbSecond.Uid = "cbS";
-            cbMinut.Uid = "cbM";
-            cbHour.Uid = "cbH";
         }
         public override AbstrPageEl CompileElement() 
         {
-            int id = 0;
-            bool sec = false;
-            bool min = false;
-            bool hour = false;
-            AColor clr = AColors.WHITE;
-            int px = 0;
-            int py = 0;
-            int sz = 0;
-            string customName = "None";
+            if (!byte.TryParse(tbS.Text, out byte sz)) sz = 0;
 
+            if (!byte.TryParse(tbY.Text, out byte py)) py = 0;
+            if (!byte.TryParse(tbX.Text, out byte px)) px = 0;
 
-            foreach (UIElement ch in PageContainer.Children) 
-            {
-                switch (ch.Uid) 
-                {
-                    case "spF":
-                        StackPanel sp = (StackPanel)ch;
+            string customName = _textBoxCustomNamePageEl.Text;
+            AColor clr = new AColor(clrBox.GeBoxColor());
 
-                        sec = (bool)((CheckBox)sp.Children[0]).IsChecked;
-                        min = (bool)((CheckBox)sp.Children[1]).IsChecked;
-                        hour = (bool)((CheckBox)sp.Children[2]).IsChecked;
-                        break;
-
-                    case "tbS":
-                        if (int.TryParse(((TextBox)ch).Text, out sz))
-                            sz = (sz & byte.MaxValue);
-                        else
-                            sz = 0;
-                        break;
-                    case "tbY":
-                        if (int.TryParse(((TextBox)ch).Text, out py))
-                            py = (py & byte.MaxValue);
-                        else
-                            py = 0;
-                        break;
-                    case "tbX":
-                        if (int.TryParse(((TextBox)ch).Text, out px))
-                            px = (px & byte.MaxValue);
-                        else
-                            px = 0;
-                        break;
-                    case "clrBox":
-                        try
-                        { clr = new AColor((ch as UIAcolorBox).GeBoxColor()); }
-                        catch
-                        { }
-                        break;
-                    case pageElIndex:
-                        if (!int.TryParse(
-                            ((ch as ContentControl).Content as string), out id))
-                        { id = 0; }
-                        break;
-                    case pageElName:
-                        customName = (ch as TextBox).Text;
-                        break;
-                }
-            }
+            bool sec  = (bool)cbSecond.IsChecked;
+            bool min  = (bool)cbMinut.IsChecked;
+            bool hour = (bool)cbHour.IsChecked;
 
             AbstrPageEl p_out = new PageTime(
-                (byte)px, (byte)py, 
-                clr, 
-                (byte)sz);
+                px, py, 
+                clr, sz);
 
             ((PageTime)p_out).Second = sec;
             ((PageTime)p_out).Minute = min;

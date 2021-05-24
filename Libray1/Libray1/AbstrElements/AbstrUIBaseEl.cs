@@ -26,8 +26,12 @@ namespace Lib
 
         public AbstrUIBase(string Name) 
         { NamePageEl = Name; }
+
         protected override void OnInitialized(EventArgs e)
-        { base.OnInitialized(e); }
+        {
+            base.OnInitialized(e);
+            Content = PageContainer;
+        }
 
         public abstract AbstrPageEl CompileElement();
 

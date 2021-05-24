@@ -14,24 +14,25 @@ namespace Lib.String
 {
     public class UIPageString : UIBaseEl
     {
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-            Content = PageContainer;
-        }
+        private readonly TextBox tbX;
+        private readonly TextBox tbY;
+        private readonly UIAcolorBox clrBox;
+        private readonly TextBox tbS;
+        private readonly TextBox tbT;
+
         public UIPageString(AbstrPageEl pEl)
             : base(60, pEl)
         {
             PageString ps = (PageString)pEl;
-            SetID (PageString.ID);
+            SetID(PageString.ID);
 
             _customNamePageEl = ps.CustomName;
             _textBoxCustomNamePageEl.Text = _customNamePageEl;
 
             // Интерфейс для настройки позиции
             Label lbl_pos = new Label();
-            TextBox tbX = new TextBox();
-            TextBox tbY = new TextBox();
+            tbX = new TextBox();
+            tbY = new TextBox();
 
             lbl_pos.Content = "Позиция";
             tbX.Text = ps.X.ToString();
@@ -52,12 +53,12 @@ namespace Lib.String
             //
 
             // Цвет
-            UIAcolorBox clrBox = new UIAcolorBox(
+            clrBox = new UIAcolorBox(
                 ps.TextColor.GetColor());
 
             // Размер
             Label lbl_size = new Label();
-            TextBox tbS = new TextBox();
+            tbS = new TextBox();
 
             lbl_size.Content = "Размер";
             tbS.Text = ps.Size.ToString();
@@ -67,7 +68,7 @@ namespace Lib.String
             //
 
             // Текст
-            TextBox tbT = new TextBox();
+            tbT = new TextBox();
 
             tbT.Height = 23;
             tbT.Text = ps.Data;
@@ -107,66 +108,19 @@ namespace Lib.String
 
         public override AbstrPageEl CompileElement()
         {
-            int id = 0;
-            string dt = "";
-            AColor clr = AColors.WHITE;
-            int px = 0;
-            int py = 0;
-            int sz = 0;
-            string customName = "None";
+            string dt = tbT.Text;
 
-            foreach (UIElement ch in PageContainer.Children) 
-            {
-                switch (ch.Uid) 
-                {
-                    case "tbT":
-                        dt = ((TextBox)ch).Text;
-                        break;
+            if (!byte.TryParse(tbS.Text, out byte sz)) sz = 0;
 
-                    case "tbS":
-                        if (int.TryParse(((TextBox)ch).Text, out sz))
-                            sz = (sz & byte.MaxValue);
-                        else
-                            sz = 0;
-                        break;
+            if (!byte.TryParse(tbY.Text, out byte py)) py = 0;
+            if (!byte.TryParse(tbX.Text, out byte px)) px = 0;
 
-                    case "tbY":
-                        if (int.TryParse(((TextBox)ch).Text, out py))
-                            py = (py & byte.MaxValue);
-                        else
-                            py = 0;
-                        break;
+            AColor clr = new AColor(clrBox.GeBoxColor());
 
-                    case "tbX":
-                        if (int.TryParse(((TextBox)ch).Text, out px))
-                            px = (px & byte.MaxValue);
-                        else
-                            px = 0;
-                        break;
-
-                    case "clrBox":
-                        try
-                        { clr = new AColor(((UIAcolorBox)ch).GeBoxColor()); }
-                        catch 
-                        { }
-                        break;
-                    case pageElIndex:
-                        if (!int.TryParse(
-                            ((ch as ContentControl).Content as string), out id))
-                        { id = 0; }
-                        break;
-                    case pageElName:
-                        customName = (ch as TextBox).Text;
-                        break;
-                }
-            }
-            AbstrPageEl p_out;
-
-            p_out = new PageString(
-                (byte)px, (byte)py, 
-                clr, 
-                (byte)sz,
-                dt);
+            string customName = _textBoxCustomNamePageEl.Text;
+            AbstrPageEl p_out = new PageString(
+                px, py,
+                clr, sz, dt);
             p_out.CustomName = customName;
 
             return p_out;

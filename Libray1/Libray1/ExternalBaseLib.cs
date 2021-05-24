@@ -13,8 +13,10 @@ namespace Lib
     enum Elements 
     {
         STRING = 65,
-        TIME = 66,
-        MAIL
+        TIME,
+        MAIL,
+        CLEAR = 127
+
     }
     static public class ExternalBaseLib
     {

@@ -7,7 +7,7 @@ namespace Lib
 {
     public class PageClear : AbstrPageEl
     {
-        public new const byte ID = 127;
+        public new const byte ID = (byte)Elements.CLEAR;
         public new const string Name = "PageClear";
         public override byte GetTypeEl()
         { return ID; }

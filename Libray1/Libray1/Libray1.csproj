@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="AbstrElements\AbstrPageEl.cs" />
     <Compile Include="AbstrElements\AbstrUIBaseEl.cs" />
-    <Compile Include="AbstrElements\UIBaseEl.cs" />
+    <Compile Include="OtherPages\UIBaseEl.cs" />
     <Compile Include="ExternalBaseLib.cs" />
     <Compile Include="ExternalLib.cs" />
     <Compile Include="OtherClass\Color\AColor.cs" />

@@ -46,7 +46,7 @@ namespace Lib.String
             List<byte> lout = new List<byte>();
 
             lout.Add(GetTypeEl());
-            lout.AddRange(GeSendtPos());
+            lout.AddRange(GetSendPos());
             lout.AddRange(GetByteColor());
             lout.Add(Size);
 

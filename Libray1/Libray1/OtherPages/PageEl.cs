@@ -33,7 +33,7 @@ namespace Lib
             this.Y = y;
         }
 
-        public List<byte> GeSendtPos()
+        public List<byte> GetSendPos()
         {
             List<byte> lout = new List<byte>();
             lout.Add(X);

@@ -5,9 +5,9 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-using Lib;
+using Lib.HelpingClass;
 
-namespace Lib.HelpingClass
+namespace Lib
 {
     public class UIBaseEl : AbstrUIBase
     {
@@ -54,6 +54,7 @@ namespace Lib.HelpingClass
             PageContainer.MouseLeftButtonDown += container_MouseDown;
             PageContainer.Drop += (s, e) => RaiseDrop(this, e.Data.GetData(typeof(AbstrUIBase)));
         }
+        //DragDropEvents
         #region Events
         private void container_MouseDown(object sender, EventArgs e)
         {
@@ -75,19 +76,10 @@ namespace Lib.HelpingClass
         #region Expand
         public void SetExpand(bool expand)
         {
-            if (!expand)
-            {
-                _hidePageElSetting();
-                _textBoxCustomNamePageEl.Width = _customNamePageElWidth;
-            }
-            else
-            {
-                _showPageElSetting();
-                _textBoxCustomNamePageEl.Width = 0;
-            }
+            if (!expand)    _hidePageElSetting();
+            else            _showPageElSetting();
             _isExpand = expand;
-            PageContainer.Height = _isExpand ? _fullHeight : _minHeight;
-
+            //PageContainer.Height = _isExpand ? _fullHeight : _minHeight;
         } 
         private void ExpandButtonClick(object sender, EventArgs eventArgs) 
         { SetExpand(!_isExpand); }
@@ -103,6 +95,8 @@ namespace Lib.HelpingClass
                 }
                 child.Visibility = Visibility.Hidden;
             }
+            _textBoxCustomNamePageEl.Width = _customNamePageElWidth;
+            PageContainer.Height = _minHeight;
         }
         private void _showPageElSetting()
         {
@@ -115,6 +109,8 @@ namespace Lib.HelpingClass
                 }
                 child.Visibility = Visibility.Visible;
             }
+            _textBoxCustomNamePageEl.Width = 0;
+            PageContainer.Height = _fullHeight;
         }
         #endregion
     }
