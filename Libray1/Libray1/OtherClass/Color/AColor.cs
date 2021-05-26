@@ -28,7 +28,7 @@ namespace Lib.HelpingClass
         public AColor(Color clr)
         { SetFromColor(clr); }
 
-        public void SetFromInt(int dt)
+        public void SetFromInt(UInt16 dt)
         {
             block2 = (byte)(dt & byte.MaxValue);
             block1 = (byte)((dt - (dt & byte.MaxValue)) >> 8);
@@ -39,7 +39,7 @@ namespace Lib.HelpingClass
             s = s.Replace("0x", ""); // 0xff_ff => ff_ff
             s = s.Replace("_", "");  //   ff_ff => ffff
 
-            int dt = int.Parse(s, System.Globalization.NumberStyles.HexNumber);
+            UInt16 dt = UInt16.Parse(s, System.Globalization.NumberStyles.HexNumber);
             SetFromInt(dt);
         }
 
@@ -98,9 +98,7 @@ namespace Lib.HelpingClass
         public string ToHex() 
         {
             string s_out = "0x";
-            string tmp_s = "";
-
-            tmp_s = block1.ToString("X");
+            string tmp_s = block1.ToString("X");
 
             while (s_out.Length < 4 - tmp_s.Length)
                 s_out += "0";

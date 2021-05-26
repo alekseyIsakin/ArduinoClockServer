@@ -55,7 +55,7 @@ namespace ArdClock.SerialControl
         public void SetBaudRate(int BaudRate) { SPort.BaudRate = BaudRate; }
 
         public void Connect() { SPort.Open(); }
-        public void Disconnect() { SPort.Close(); ReadyToSend = false; }
+        public void Disconnect() { SPort.Close(); }
 
         public void Send(ArdPage.APage page)
         {
@@ -78,9 +78,9 @@ namespace ArdClock.SerialControl
                 {
                     // Добавить предупреждение о переполнении
                     SPort.Write(byteArr.ToArray(), 0, byteArr.Count);
-                    ReadyToSend = false;
 
                     SuccSend?.Invoke(this, null);
+                    ReadyToSend = false;
 
                     timer.Start();
                 }

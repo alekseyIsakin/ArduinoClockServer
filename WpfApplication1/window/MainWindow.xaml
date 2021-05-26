@@ -5,10 +5,8 @@
         StateChanged="Window_StateChanged" ResizeMode="CanMinimize" ShowInTaskbar="False" Closing="Window_Closing">
     <StackPanel >
         <Menu Height="23">
-            <MenuItem Header="Файл"/>
-            <MenuItem Header="Справка">
-                <MenuItem Header="Помощь"/>
-                <Separator></Separator>
+            <MenuItem Header="Справка" Height="23">
+                <Separator/>
                 <MenuItem Header="О программе" Click="MenuAboutAppClick"/>
             </MenuItem>
         </Menu>
